@@ -1400,11 +1400,23 @@ h5,
 .sidebar-box *:last-child {
   margin-bottom: 0;
 }
+
 .sidebar-box h3 {
   font-size: 18px;
   margin-bottom: 15px;
 }
+.order-messsage{
+  position: relative;
+  
+}
 
+.info {
+  background: #e6e6fa;
+  width: 300px;
+  height: 400px;
+  padding: 10px 20px;
+  border-radius: 20px;
+}
 .categories li,
 .sidelink li {
   position: relative;
