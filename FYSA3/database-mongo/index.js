@@ -37,7 +37,7 @@ var userSchema = mongoose.Schema({
 var orderSchema = mongoose.Schema({
   userId: String,
   workerId: String,
-  userName :String,
+  userName: String,
   date: String,
   state: String,
   location: String,
@@ -128,8 +128,8 @@ var selectAllOrders = function (callback) {
   });
 };
 
-var selectWorkerOrders = function (data, callback) {
-  Order.find({ workerId: data }, function (err, orders) {
+var selectWorkerPandingOrders = function (data, callback) {
+  Order.find({ workerId: data, state: "panding" }, function (err, orders) {
     if (err) {
       callback(err, null);
     } else {
@@ -137,10 +137,44 @@ var selectWorkerOrders = function (data, callback) {
     }
   });
 };
+var selectWorkerDoingOrders = function (data, callback) {
+  Order.find({ workerId: data, state: "doing" }, function (err, orders) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, orders);
+    }
+  });
+};
+var selectWorkerDoneOrders = function (data, callback) {
+  Order.find({ workerId: data, state: "done" }, function (err, orders) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, orders);
+    }
+  });
+};
+var updateOrder = function (data, callback) {
+  Order.findOneAndUpdate(
+    { _id: data.id },
+    { state: data.state },
+    function (err, orders) {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, orders);
+      }
+    }
+  );
+};
 module.exports.addWorker = addWorker;
-module.exports.selectAllOrders = selectAllOrders;
-module.exports.selectWorkerOrders = selectWorkerOrders;
-module.exports.selectOneWorker = selectOneWorker;
+module.exports.updateOrder = updateOrder;
 module.exports.selectOneUser = selectOneUser;
 module.exports.selectAllProf = selectAllProf;
 module.exports.selectWorkers = selectWorkers;
+module.exports.selectOneWorker = selectOneWorker;
+module.exports.selectAllOrders = selectAllOrders;
+module.exports.selectWorkerPandingOrders = selectWorkerPandingOrders;
+module.exports.selectWorkerDoingOrders = selectWorkerDoingOrders;
+module.exports.selectWorkerDoneOrders = selectWorkerDoneOrders;
