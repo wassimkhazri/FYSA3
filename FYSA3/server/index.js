@@ -76,7 +76,17 @@ app.get("/orders", function (req, res) {
     }
   });
 });
-
+app.post("/api/orders", function (req, res) {
+  console.log(req.body.data);
+  db.selectWorkerOrders(req.body.data, function (err, data) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+});
 app.listen(3000, function () {
   console.log("listening on port 3000!");
 });

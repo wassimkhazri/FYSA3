@@ -37,6 +37,7 @@ var userSchema = mongoose.Schema({
 var orderSchema = mongoose.Schema({
   userId: String,
   workerId: String,
+  userName :String,
   date: String,
   state: String,
   location: String,
@@ -127,8 +128,18 @@ var selectAllOrders = function (callback) {
   });
 };
 
+var selectWorkerOrders = function (data, callback) {
+  Order.find({ workerId: data }, function (err, orders) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, orders);
+    }
+  });
+};
 module.exports.addWorker = addWorker;
 module.exports.selectAllOrders = selectAllOrders;
+module.exports.selectWorkerOrders = selectWorkerOrders;
 module.exports.selectOneWorker = selectOneWorker;
 module.exports.selectOneUser = selectOneUser;
 module.exports.selectAllProf = selectAllProf;
