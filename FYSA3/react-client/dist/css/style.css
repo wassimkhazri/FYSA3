@@ -7,7 +7,30 @@ html {
   font-size: 10px;
 }
 .orders {
-  margin-top: 100px;
+  margin-top: 50px;
+}
+.workerfeed {
+  margin-top: 150px;
+}
+.pandingorders {
+  background-color: #eaf6fc;
+  margin-bottom: 100px;
+}
+.doingorders {
+  margin-bottom: 100px;
+  background-color: #dbf3ff;
+}
+.doneorders {
+  margin-bottom: 100px;
+  background-color: #b3d3e3;
+}
+.accbtn {
+  background-color: #2e3192;
+  color: white;
+}
+.accbtn:hover {
+  background-color: #6165cf;
+  color: white;
 }
 .font-size-11 {
   font-size: 11px;
