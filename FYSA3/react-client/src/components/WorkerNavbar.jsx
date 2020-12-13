@@ -37,13 +37,16 @@ class WorkerNavbar extends React.Component {
                     <li className="active">
                       <a
                         onClick={() => {
-                          this.props.handleClick("worker-feed");
+                          this.props.handleClick("home");
                         }}
                         className="nav-link">
                         Home
                       </a>
                     </li>
-                    <li onClick={() => {}}>
+                    <li
+                      onClick={() => {
+                        this.props.handleClick("profile");
+                      }}>
                       <a className="nav-link">Profil</a>
                     </li>
                     <li

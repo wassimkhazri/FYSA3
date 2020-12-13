@@ -1,6 +1,7 @@
 import React from "react";
 import WorkerNavbar from "./WorkerNavbar.jsx";
 import axios from "axios";
+import WorkerMyProfile from "./WorkerMyProfile.jsx";
 
 class WorkerFeed extends React.Component {
   constructor(props) {
@@ -8,8 +9,10 @@ class WorkerFeed extends React.Component {
     this.state = {
       panding: [],
       doing: [],
-      done: []
+      done: [],
+      view: "home"
     };
+    this.handleClick = this.handleClick.bind(this);
     this.handleAccept = this.handleAccept.bind(this);
   }
   componentDidMount() {
@@ -61,110 +64,116 @@ class WorkerFeed extends React.Component {
         console.log(err);
       });
   }
+  handleClick(view) {
+    this.setState({ view });
+  }
   render() {
-    console.log(this.state.orders);
-    return (
-      <div className="workerfeed ">
-        <WorkerNavbar handleClick={this.props.handleClick} />
-        <div className="pandingorders container">
-          <h1>Pending Orders</h1>
-          <table className="table table-striped orders">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Customer</th>
-                <th scope="col">Location</th>
-                <th scope="col">Date</th>
-                <th scope="col">Operation</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.panding.map((element, index) => {
-                return (
-                  <tr>
-                    <th scope="row">{index}</th>
-                    <td>{element.userName}</td>
-                    <td>{element.location}</td>
-                    <td>{element.date}</td>
-                    <td>
-                      <button
-                        onClick={() => {
-                          this.handleAccept(element._id, "doing");
-                        }}
-                        type="button"
-                        className="btn btn-success accbtn">
-                        Accept
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+    if (this.state.view === "home") {
+      return (
+        <div className="workerfeed ">
+          <WorkerNavbar handleClick={this.handleClick} />
+          <div className="pandingorders container">
+            <h1>Pending Orders</h1>
+            <table className="table table-striped orders">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Customer</th>
+                  <th scope="col">Location</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Operation</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.panding.map((element, index) => {
+                  return (
+                    <tr>
+                      <th scope="row">{index}</th>
+                      <td>{element.userName}</td>
+                      <td>{element.location}</td>
+                      <td>{element.date}</td>
+                      <td>
+                        <button
+                          onClick={() => {
+                            this.handleAccept(element._id, "doing");
+                          }}
+                          type="button"
+                          className="btn btn-success accbtn">
+                          Accept
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <div className="doingorders container">
+            <h1>Accepted Orders</h1>
+            <table className="table table-striped orders">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Customer</th>
+                  <th scope="col">Location</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Operation</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.doing.map((element, index) => {
+                  return (
+                    <tr>
+                      <th scope="row">{index}</th>
+                      <td>{element.userName}</td>
+                      <td>{element.location}</td>
+                      <td>{element.date}</td>
+                      <td>
+                        <button
+                          onClick={() => {
+                            this.handleAccept(element._id, "done");
+                          }}
+                          type="button"
+                          className="btn btn-success accbtn">
+                          Done
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <div className="doneorders container">
+            <h1>Orders History</h1>
+            <table className="table table-striped orders">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Customer</th>
+                  <th scope="col">Location</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.done.map((element, index) => {
+                  return (
+                    <tr>
+                      <th scope="row">{index}</th>
+                      <td>{element.userName}</td>
+                      <td>{element.location}</td>
+                      <td>{element.date}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div className="doingorders container">
-          <h1>Accepted Orders</h1>
-          <table className="table table-striped orders">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Customer</th>
-                <th scope="col">Location</th>
-                <th scope="col">Date</th>
-                <th scope="col">Operation</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.doing.map((element, index) => {
-                return (
-                  <tr>
-                    <th scope="row">{index}</th>
-                    <td>{element.userName}</td>
-                    <td>{element.location}</td>
-                    <td>{element.date}</td>
-                    <td>
-                      <button
-                        onClick={() => {
-                          this.handleAccept(element._id, "done");
-                        }}
-                        type="button"
-                        className="btn btn-success accbtn">
-                        Done
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-        <div className="doneorders container">
-          <h1>Orders History</h1>
-          <table className="table table-striped orders">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Customer</th>
-                <th scope="col">Location</th>
-                <th scope="col">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.done.map((element, index) => {
-                return (
-                  <tr>
-                    <th scope="row">{index}</th>
-                    <td>{element.userName}</td>
-                    <td>{element.location}</td>
-                    <td>{element.date}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    );
+      );
+    } else {
+      return <WorkerMyProfile data={this.props.data} />;
+    }
   }
 }
 export default WorkerFeed;
