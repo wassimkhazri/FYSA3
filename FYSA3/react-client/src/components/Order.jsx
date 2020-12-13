@@ -17,6 +17,9 @@ class Order extends React.Component {
               placeholder="Write your order."
               cols="30"
               rows="10"></textarea>
+            <br></br>
+            <input type="text" class="form-control" placeholder="Date"></input>
+            <br></br>
           </div>
           <input
             type="submit"

@@ -1383,6 +1383,11 @@ h5,
 .order-messsage{
   position: relative;
   
+  
+}
+
+.order-date{
+  background: #e6e6fa
 }
 
 .info {
@@ -2170,12 +2175,12 @@ form .form-control {
   padding-right: 20px;
   border-color: transparent;
   margin-right: 10px;
-  background: #efefef;
+  background:  hsl(240deg 67% 94%);;
 }
 form .form-control:active,
 form .form-control:focus {
   border-color: transparent;
-  background: #efefef;
+  background: hsl(240deg 67% 94%);
   -webkit-box-shadow: none;
   box-shadow: none;
 }
@@ -2184,6 +2189,7 @@ form textarea {
   height: auto !important;
   padding-top: 10px !important;
   padding-bottom: 10px !important;
+  
 }
 
 form .btn {
