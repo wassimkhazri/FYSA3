@@ -178,7 +178,6 @@ app.post("/api/orders/user/done", function (req, res) {
     }
   });
 });
-
 app.put("/order/update", function (req, res) {
   console.log(req.body);
   db.updateOrder(req.body, function (err, data) {

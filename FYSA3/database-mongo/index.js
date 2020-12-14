@@ -250,7 +250,6 @@ module.exports.selectAllOrders = selectAllOrders;
 module.exports.selectWorkerPandingOrders = selectWorkerPandingOrders;
 module.exports.selectWorkerDoingOrders = selectWorkerDoingOrders;
 module.exports.selectWorkerDoneOrders = selectWorkerDoneOrders;
-
 module.exports.selectUserPandingOrders = selectUserPandingOrders;
 module.exports.selectUserDoingOrders = selectUserDoingOrders;
 module.exports.selectUserDoneOrders = selectUserDoneOrders;
