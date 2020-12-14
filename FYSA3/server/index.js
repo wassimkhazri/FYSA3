@@ -36,6 +36,7 @@ app.post("/api/workers", function (req, res) {
 
 app.post("/login", (req, res) => {
   let givenPassword = req.body.password;
+  console.log(req.body);
   db.selectOneWorker(req.body, (err, worker) => {
     if (err) {
       res.sendStatus(500);
@@ -51,9 +52,9 @@ app.post("/login", (req, res) => {
               function (err, result) {
                 if (err) {
                   console.log("compare error", err);
-                } else {
+                } else if (result) {
                   console.log("user password matches.", result);
-                  isLoggedIn = result;
+                  // isLoggedIn = result;
                   // To do: if compare true user must be redirected to feed
                 }
               }
@@ -95,9 +96,10 @@ app.post("/userRegister", (req, res) => {
   db.addUser(req.body, (err, user) => {
     if (err) {
       res.send("User not created");
+    } else {
+      res.json(user);
     }
     console.log("User created successfully");
-    res.json(user);
   });
 });
 

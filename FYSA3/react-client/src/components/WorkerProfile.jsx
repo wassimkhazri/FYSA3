@@ -49,8 +49,8 @@ class WorkerProfile extends React.Component {
                           <li class="d-block mb-3">
                             <span class="d-block text-black">Name:</span>
                             <span>
-                              {this.props.data.firstName}_
-                              {this.props.data.lastName}
+                              {this.props.data.first_name}_
+                              {this.props.data.last_name}
                             </span>
                           </li>
                           <li class="d-block mb-3">
@@ -117,8 +117,8 @@ class WorkerProfile extends React.Component {
                           <li class="d-block mb-3">
                             <span class="d-block text-black">Name:</span>
                             <span>
-                              {this.props.data.firstName}_
-                              {this.props.data.lastName}
+                              {this.props.data.first_name}_
+                              {this.props.data.last_name}
                             </span>
                           </li>
                           <li class="d-block mb-3">
