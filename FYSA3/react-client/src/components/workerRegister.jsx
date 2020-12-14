@@ -41,9 +41,10 @@ class WorkerRegister extends Component {
     delete data.profs;
     console.log(data);
     axios
-      .post("/register", { data })
+      .post("/workerRegister", { data })
       .then((res) => {
         console.log(res.data);
+        this.props.handleSubmit("home");
       })
       .catch((err) => {
         console.log("There's an error", err);

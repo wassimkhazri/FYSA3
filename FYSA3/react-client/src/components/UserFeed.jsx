@@ -90,10 +90,9 @@ class UserFeed extends React.Component {
           />
         </div>
       );
-    } else{
+    } else {
       return <UserMyProfile data={this.props.data} />;
-
-    } 
+    }
   }
 }
 export default UserFeed;

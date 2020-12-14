@@ -25,8 +25,6 @@ app.get("/api/profs", function (req, res) {
   });
 });
 
-
-
 app.post("/login", (req, res) => {
   let givenPassword = req.body.password;
   console.log(req.body);
@@ -74,7 +72,7 @@ app.post("/login", (req, res) => {
 
 app.post("/workerRegister", (req, res) => {
   console.log(req.body);
-  var data = req.body;
+  var data = req.body.data;
   data.rate = 0;
   db.addWorker(data, (err, worker) => {
     if (err) {

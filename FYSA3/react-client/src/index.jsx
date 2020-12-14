@@ -41,7 +41,7 @@ class App extends React.Component {
           console.log(user);
         } else {
           this.setState({
-            view: "home"  
+            view: "home"
           });
         }
       })
@@ -50,7 +50,7 @@ class App extends React.Component {
       });
   }
   render() {
-      if (this.state.view === "home") {
+    if (this.state.view === "home") {
       return (
         <Home handleClick={this.handleClick} handleLogin={this.handleLogin} />
       );
@@ -63,7 +63,7 @@ class App extends React.Component {
     } else if (this.state.view === "worker-signup") {
       return (
         <div>
-          <Register />
+          <Register handleSubmit={this.handleClick} />
         </div>
       );
     } else if (this.state.view === "worker-feed") {
