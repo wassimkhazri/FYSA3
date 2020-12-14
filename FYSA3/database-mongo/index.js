@@ -222,6 +222,36 @@ var selectWorkerDoneOrders = function (data, callback) {
       }
     });
 };
+
+var selectUserPandingOrders = function (data, callback) {
+  Order.find({ user_id: data, state: "panding" }, function (err, orders) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, orders);
+    }
+  });
+};
+var selectUserDoingOrders = function (data, callback) {
+  Order.find({ user_id: data, state: "doing" }, function (err, orders) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, orders);
+    }
+  });
+};
+
+var selectUserDoneOrders = function (data, callback) {
+  Order.find({ user_id: data, state: "done" }, function (err, orders) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, orders);
+    }
+  });
+};
+
 var updateOrder = function (data, callback) {
   Order.findOneAndUpdate(
     { _id: data.id },
@@ -246,3 +276,6 @@ module.exports.selectAllOrders = selectAllOrders;
 module.exports.selectWorkerPandingOrders = selectWorkerPandingOrders;
 module.exports.selectWorkerDoingOrders = selectWorkerDoingOrders;
 module.exports.selectWorkerDoneOrders = selectWorkerDoneOrders;
+module.exports.selectUserPandingOrders = selectUserPandingOrders;
+module.exports.selectUserDoingOrders = selectUserDoingOrders;
+module.exports.selectUserDoneOrders = selectUserDoneOrders;
