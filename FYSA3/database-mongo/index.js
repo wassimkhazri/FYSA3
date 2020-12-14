@@ -170,7 +170,7 @@ var selectAllOrders = function (callback) {
 };
 
 var selectWorkerPandingOrders = function (data, callback) {
-  Order.find({ workerId: data, state: "panding" }, function (err, orders) {
+  Order.find({ worker_id: data, state: "panding" }, function (err, orders) {
     if (err) {
       callback(err, null);
     } else {
@@ -179,7 +179,7 @@ var selectWorkerPandingOrders = function (data, callback) {
   });
 };
 var selectWorkerDoingOrders = function (data, callback) {
-  Order.find({ workerId: data, state: "doing" }, function (err, orders) {
+  Order.find({ worker_id: data, state: "doing" }, function (err, orders) {
     if (err) {
       callback(err, null);
     } else {
@@ -188,7 +188,7 @@ var selectWorkerDoingOrders = function (data, callback) {
   });
 };
 var selectWorkerDoneOrders = function (data, callback) {
-  Order.find({ workerId: data, state: "done" }, function (err, orders) {
+  Order.find({ worker_id: data, state: "done" }, function (err, orders) {
     if (err) {
       callback(err, null);
     } else {
