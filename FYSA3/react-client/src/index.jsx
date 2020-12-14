@@ -5,6 +5,7 @@ import UserRegister from "./components/UserRegister.jsx";
 import Home from "./components/Home.jsx";
 import WorkerLogin from "./components/Login.jsx";
 import UserFeed from "./components/UserFeed.jsx";
+import WorkerFeed from "./components/WorkerFeed.jsx";
 import OrdersList from "./components/OrdersList.jsx";
 import WorkersList from "./components/WorkersList.jsx";
 import WorkerPrfile from "./components/WorkerProfile.jsx";
@@ -53,7 +54,7 @@ class App extends React.Component {
         } else {
           this.setState({ user: user.data, view: "user-feed" });
         }
-        console.log(user.data);
+        console.log(this.state.user);
       })
       .catch((error) => {
         console.log("error");
@@ -79,7 +80,7 @@ class App extends React.Component {
     } else if (this.state.view === "worker-feed") {
       return (
         <div>
-          <Register />
+          <WorkerFeed handleClick={this.handleClick} data={this.state.user} />
         </div>
       );
     } else if (this.state.view === "user-feed") {
