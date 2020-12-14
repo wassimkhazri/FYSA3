@@ -135,7 +135,7 @@ class UserRegister extends Component {
                         <div className="form-group">
                           <input
                             type="submit"
-                            value="Send Message"
+                            value="Create Profile"
                             className="btn btn-primary px-5"
                           />
                         </div>

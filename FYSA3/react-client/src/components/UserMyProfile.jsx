@@ -29,11 +29,11 @@ class UserMyProfile extends React.Component {
                 </div>
                 <div className="col-md-6">
                   <div className="profile-head">
-                    <h5>Kshiti Ghelani</h5>
-                    <h6>Web Developer and Designer</h6>
-                    <p className="proile-rating">
-                      RANKINGS : <span>8/10</span>
-                    </p>
+                    <h5>
+                      {this.props.data.first_name}{" "}
+                      {this.props.data.last_name}
+                    </h5>
+                    <h6>User</h6>
                     <ul className="nav nav-tabs" id="myTab" role="tablist">
                       <li className="nav-item">
                         <a
@@ -45,18 +45,6 @@ class UserMyProfile extends React.Component {
                           aria-controls="home"
                           aria-selected="true">
                           About
-                        </a>
-                      </li>
-                      <li className="nav-item">
-                        <a
-                          className="nav-link"
-                          id="profile-tab"
-                          data-toggle="tab"
-                          href="#profile"
-                          role="tab"
-                          aria-controls="profile"
-                          aria-selected="false">
-                          Timeline
                         </a>
                       </li>
                     </ul>
@@ -82,10 +70,10 @@ class UserMyProfile extends React.Component {
                       aria-labelledby="home-tab">
                       <div className="row">
                         <div className="col-md-6">
-                          <label>User Id</label>
+                          <label>UserName</label>
                         </div>
                         <div className="col-md-6">
-                          <p>{this.props.data.userName}</p>
+                          <p>{this.props.data.username}</p>
                         </div>
                       </div>
                       <div className="row">
@@ -94,8 +82,8 @@ class UserMyProfile extends React.Component {
                         </div>
                         <div className="col-md-6">
                           <p>
-                            {this.props.data.firstName}{" "}
-                            {this.props.data.lastName}
+                            {this.props.data.first_name}{" "}
+                            {this.props.data.last_name}
                           </p>
                         </div>
                       </div>
@@ -116,64 +104,11 @@ class UserMyProfile extends React.Component {
                         </div>
                       </div>
                       <div className="row">
-                        <div className="col-md-6">
-                          <label>Profession</label>
+                      <div className="col-md-6">
+                          <label>Location</label>
                         </div>
                         <div className="col-md-6">
-                          <p>{this.props.data.prof}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="tab-pane fade"
-                      id="profile"
-                      role="tabpanel"
-                      aria-labelledby="profile-tab">
-                      <div className="row">
-                        <div className="col-md-6">
-                          <label>Experience</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>Expert</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-6">
-                          <label>Hourly Rate</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>10$/hr</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-6">
-                          <label>Total Projects</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>230</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-6">
-                          <label>English Level</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>Expert</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-6">
-                          <label>Availability</label>
-                        </div>
-                        <div className="col-md-6">
-                          <p>6 months</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-12">
-                          <label>Your Bio</label>
-                          <br />
-                          <p>Your detail description</p>
+                          <p>{this.props.data.location}</p>
                         </div>
                       </div>
                     </div>

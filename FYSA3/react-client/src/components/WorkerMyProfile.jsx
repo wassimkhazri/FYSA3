@@ -29,8 +29,9 @@ class WorkerMyProfile extends React.Component {
                 </div>
                 <div className="col-md-6">
                   <div className="profile-head">
-                    <h5>Kshiti Ghelani</h5>
-                    <h6>Web Developer and Designer</h6>
+                    <h5>{this.props.data.first_name}{" "}
+                            {this.props.data.last_name}</h5>
+                    <h6>{this.props.data.prof}</h6>
                     <p className="proile-rating">
                       RANKINGS : <span>8/10</span>
                     </p>
@@ -82,10 +83,10 @@ class WorkerMyProfile extends React.Component {
                       aria-labelledby="home-tab">
                       <div className="row">
                         <div className="col-md-6">
-                          <label>User Id</label>
+                          <label>UserName</label>
                         </div>
                         <div className="col-md-6">
-                          <p>{this.props.data.userName}</p>
+                          <p>{this.props.data.username}</p>
                         </div>
                       </div>
                       <div className="row">
@@ -94,8 +95,8 @@ class WorkerMyProfile extends React.Component {
                         </div>
                         <div className="col-md-6">
                           <p>
-                            {this.props.data.firstName}{" "}
-                            {this.props.data.lastName}
+                            {this.props.data.first_name}{" "}
+                            {this.props.data.last_name}
                           </p>
                         </div>
                       </div>
@@ -121,6 +122,14 @@ class WorkerMyProfile extends React.Component {
                         </div>
                         <div className="col-md-6">
                           <p>{this.props.data.prof}</p>
+                        </div>
+                      </div>
+                      <div className="row">
+                      <div className="col-md-6">
+                          <label>Location</label>
+                        </div>
+                        <div className="col-md-6">
+                          <p>{this.props.data.location}</p>
                         </div>
                       </div>
                     </div>
