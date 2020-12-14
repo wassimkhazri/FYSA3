@@ -55,6 +55,12 @@ class UserNavbar extends React.Component {
                       }}>
                       <a className="nav-link">Orders</a>
                     </li>
+                    <li
+                      onClick={() => {
+                        this.props.handleClick("");
+                      }}>
+                      <a className="nav-link">Log Out </a>
+                    </li>
                   </ul>
                 </nav>
               </div>

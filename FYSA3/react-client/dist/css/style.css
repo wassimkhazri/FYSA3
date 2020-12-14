@@ -1390,7 +1390,16 @@ h5,
 .by:hover {
   border-bottom: 1px dotted #fb7400;
 }
-
+.sidebar {
+  margin-top: 110px;
+}
+.orderform {
+  margin-top: 500px;
+}
+.sendorderbtn {
+  width: 200px;
+  margin-left: 175px;
+}
 .sidebar-box {
   margin-bottom: 30px;
   padding: 25px;
@@ -1414,11 +1423,13 @@ h5,
 .order-date {
   background: #e6e6fa;
 }
-
+.orderbtn {
+  margin-left: 175px;
+}
 .info {
   background: #e6e6fa;
-  width: 300px;
-  height: 400px;
+  width: 500px;
+  height: 450px;
   padding: 10px 20px;
   border-radius: 20px;
 }
@@ -2210,8 +2221,8 @@ form .form-control:focus {
   box-shadow: none;
 }
 
-form textarea {
-  height: auto !important;
+textarea {
+  height: 150px !important;
   padding-top: 10px !important;
   padding-bottom: 10px !important;
 }
