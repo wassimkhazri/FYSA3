@@ -6,9 +6,9 @@ class WorkerRegister extends Component {
     super(props);
     this.state = {
       profs: [],
-      userName: "",
-      firstName: "",
-      lastName: "",
+      username: "",
+      first_name: "",
+      last_name: "",
       email: "",
       phone: "",
       location: "",
@@ -80,8 +80,8 @@ class WorkerRegister extends Component {
                         <div className="form-group">
                           <input
                             type="text"
-                            value={this.state.userName}
-                            name="userName"
+                            value={this.state.username}
+                            name="username"
                             onChange={this.handleChange}
                             onChange={this.handleChange}
                             className="form-control"
@@ -91,8 +91,8 @@ class WorkerRegister extends Component {
                         <div className="form-group">
                           <input
                             type="text"
-                            value={this.state.firstName}
-                            name="firstName"
+                            value={this.state.first_name}
+                            name="first_name"
                             onChange={this.handleChange}
                             className="form-control"
                             placeholder="First Name"
@@ -101,8 +101,8 @@ class WorkerRegister extends Component {
                         <div className="form-group">
                           <input
                             type="text"
-                            value={this.state.LastName}
-                            name="lastName"
+                            value={this.state.last_name}
+                            name="last_name"
                             onChange={this.handleChange}
                             className="form-control"
                             placeholder="Last Name"
