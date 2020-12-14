@@ -50,9 +50,14 @@ var userSchema = mongoose.Schema({
   }
 });
 var orderSchema = mongoose.Schema({
-  userId: String,
-  workerId: String,
-  userName: String,
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  },
+  worker_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Worker"
+  },
   date: String,
   state: String,
   location: String
@@ -60,7 +65,9 @@ var orderSchema = mongoose.Schema({
 
 var profSchema = mongoose.Schema({
   name: String,
-  workers: Array,
+  workers: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Worker" }]
+  },
   img: String
 });
 
@@ -77,23 +84,15 @@ var Order = mongoose.model("Order", orderSchema);
 // order.save();
 
 var selectAllProf = function (callback) {
-  Prof.find({}, function (err, prof) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, prof);
-    }
-  });
-};
-
-var selectWorkers = function (myWorker, callback) {
-  Worker.find({ prof: myWorker }, function (err, workers) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, workers);
-    }
-  });
+  Prof.find({})
+    .populate("workers")
+    .exec((err, prof) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, prof);
+      }
+    });
 };
 
 var selectOneWorker = function (worker, callback) {
@@ -160,41 +159,57 @@ const addUser = function (user, callback) {
 };
 
 var selectAllOrders = function (callback) {
-  Order.find({}, function (err, orders) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, orders);
-    }
-  });
+  Order.find({})
+    .populate("worker_id")
+    .exec((err, orders) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, orders);
+      }
+    });
+
+  // Order.find({}, function (err, orders) {
+  //   if (err) {
+  //     callback(err, null);
+  //   } else {
+  //     callback(null, orders);
+  //   }
+  // });
 };
 
 var selectWorkerPandingOrders = function (data, callback) {
-  Order.find({ worker_id: data, state: "panding" }, function (err, orders) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, orders);
-    }
-  });
+  Order.find({ worker_id: data, state: "panding" })
+    .populate("user_id")
+    .exec((err, orders) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, orders);
+      }
+    });
 };
 var selectWorkerDoingOrders = function (data, callback) {
-  Order.find({ worker_id: data, state: "doing" }, function (err, orders) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, orders);
-    }
-  });
+  Order.find({ worker_id: data, state: "doing" })
+    .populate("user_id")
+    .exec((err, orders) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, orders);
+      }
+    });
 };
 var selectWorkerDoneOrders = function (data, callback) {
-  Order.find({ worker_id: data, state: "done" }, function (err, orders) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, orders);
-    }
-  });
+  Order.find({ worker_id: data, state: "done" })
+    .populate("user_id")
+    .exec((err, orders) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, orders);
+      }
+    });
 };
 var updateOrder = function (data, callback) {
   Order.findOneAndUpdate(
@@ -214,7 +229,6 @@ module.exports.addUser = addUser;
 module.exports.updateOrder = updateOrder;
 module.exports.selectOneUser = selectOneUser;
 module.exports.selectAllProf = selectAllProf;
-module.exports.selectWorkers = selectWorkers;
 module.exports.selectOneWorker = selectOneWorker;
 module.exports.selectAllOrders = selectAllOrders;
 module.exports.selectWorkerPandingOrders = selectWorkerPandingOrders;
