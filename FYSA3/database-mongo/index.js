@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var bcrypt = require("bcryptjs");
 mongoose.connect(
   "mongodb+srv://user:Y0QIFKndntB1HIz3@cluster0.efioa.mongodb.net/DIGITAL-DEALERS?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true }
@@ -14,7 +15,12 @@ db.once("open", function () {
 });
 
 var workerSchema = mongoose.Schema({
-  userName: String,
+  userName: {
+    type: String,
+    max: 255,
+    required: true,
+    unique: true
+  },
   firstName: String,
   lastName: String,
   email: String,
@@ -22,17 +28,28 @@ var workerSchema = mongoose.Schema({
   location: String,
   prof: String,
   rate: Number,
-  password: String,
+  password: { 
+    type: String, 
+    required: true 
+  },
   infos: String
 });
 var userSchema = mongoose.Schema({
-  userName: String,
+  userName: {
+    type: String,
+    max: 255,
+    required: true,
+    unique: true
+  },
   firstName: String,
   lastName: String,
   email: String,
   phone: Number,
   location: String,
-  password: String
+  password: { 
+    type: String, 
+    required: true 
+  }
 });
 var orderSchema = mongoose.Schema({
   userId: String,
@@ -81,39 +98,65 @@ var selectWorkers = function (myWorker, callback) {
 };
 
 var selectOneWorker = function (worker, callback) {
-  Worker.findOne(
-    { userName: worker.userName, password: worker.password },
-    function (err, Worker) {
-      if (err) {
-        callback(err, null);
-      } else {
-        console.log(worker);
-        callback(null, Worker);
-      }
-    }
-  );
-};
-var selectOneUser = function (user, callback) {
-  User.findOne(
-    { userName: user.userName, password: user.password },
-    function (err, user) {
-      if (err) {
-        callback(err, null);
-      } else {
-        console.log(user);
-        callback(null, user);
-      }
-    }
-  );
-};
-const addWorker = function (worker, callback) {
-  var profile = new Worker(worker);
-  profile.save((err, profile) => {
+  Worker.findOne({ userName: worker.userName }, function (err, result) {
     if (err) {
+      console.log("error while searching worker");
       callback(err, null);
     } else {
-      callback(null, profile);
+      // if (result) {
+      // }
+      console.log("db: Worker found:");
+      console.log(result);
+      callback(null, result);
     }
+  });
+};
+
+var selectOneUser = function (user, callback) {
+  console.log("Yooo");
+  User.findOne({ userName: user.userName }, function (err, result) {
+    if (err) {
+      console.log("error while searching user");
+      callback(err, null);
+    } else {
+      // if (result) {
+      // }
+      console.log("db: User found:");
+      console.log(result);
+      callback(null, result);
+    }
+  });
+};
+
+const addWorker = function (worker, callback) {
+  var profile = new Worker(worker);
+  bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.hash(profile.password, salt, function (err, hash) {
+      profile.password = hash;
+      profile.save((err, profile) => {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, profile);
+        }
+      });
+    });
+  });
+};
+
+const addUser = function (user, callback) {
+  let profile = new User(user);
+  bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.hash(profile.password, salt, function (err, hash) {
+      profile.password = hash;
+      profile.save((err, profile) => {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, profile);
+        }
+      });
+    });
   });
 };
 
@@ -128,6 +171,7 @@ var selectAllOrders = function (callback) {
 };
 
 module.exports.addWorker = addWorker;
+module.exports.addUser = addUser;
 module.exports.selectAllOrders = selectAllOrders;
 module.exports.selectOneWorker = selectOneWorker;
 module.exports.selectOneUser = selectOneUser;
