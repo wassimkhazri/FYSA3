@@ -4,6 +4,7 @@ import axios from "axios";
 import WorkersList from "./WorkersList.jsx";
 import WorkerProfile from "./WorkerProfile.jsx";
 import UserMyProfile from "./UserMyProfile.jsx";
+import UserOrders from "./UserOrders.jsx";
 
 class UserFeed extends React.Component {
   constructor(props) {
@@ -91,9 +92,17 @@ class UserFeed extends React.Component {
           />
         </div>
       );
-    } else {
+    } else if (this.state.view === "profil") {
       return (
         <UserMyProfile handleClick={this.handleClick} data={this.props.data} />
+      );
+    } else if (this.state.view === "orders") {
+      return (
+        <UserOrders
+          handleClick={this.handleClick}
+          handleClick={this.handleClick}
+          user={this.state.user}
+        />
       );
     }
   }

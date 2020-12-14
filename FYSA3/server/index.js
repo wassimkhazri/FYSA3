@@ -96,7 +96,8 @@ app.post("/addorder", (req, res) => {
   });
 });
 app.post("/userRegister", (req, res) => {
-  db.addUser(req.body, (err, user) => {
+  console.log(req.body.data);
+  db.addUser(req.body.data, (err, user) => {
     if (err) {
       res.send("User not created");
     } else {
@@ -115,7 +116,7 @@ app.get("/orders", function (req, res) {
     }
   });
 });
-app.post("/api/orders/panding", function (req, res) {
+app.post("/api/orders/pending", function (req, res) {
   console.log(req.body.data);
   db.selectWorkerPandingOrders(req.body.data, function (err, data) {
     if (err) {
@@ -148,9 +149,10 @@ app.post("/api/orders/done", function (req, res) {
     }
   });
 });
-app.post("/api/orders/user/panding", function (req, res) {
+
+app.post("/api/orders/user", function (req, res) {
   console.log(req.body.data);
-  db.selectUserPandingOrders(req.body.data, function (err, data) {
+  db.selectUserOrders(req.body.data, function (err, data) {
     if (err) {
       res.sendStatus(500);
     } else {
@@ -159,28 +161,7 @@ app.post("/api/orders/user/panding", function (req, res) {
     }
   });
 });
-app.post("/api/orders/user/doing", function (req, res) {
-  console.log(req.body.data);
-  db.selectUserDoingOrders(req.body.data, function (err, data) {
-    if (err) {
-      res.sendStatus(500);
-    } else {
-      console.log(data);
-      res.json(data);
-    }
-  });
-});
-app.post("/api/orders/user/done", function (req, res) {
-  console.log(req.body.data);
-  db.selectUserDoneOrders(req.body.data, function (err, data) {
-    if (err) {
-      res.sendStatus(500);
-    } else {
-      console.log(data);
-      res.json(data);
-    }
-  });
-});
+
 app.put("/order/update", function (req, res) {
   console.log(req.body);
   db.updateOrder(req.body, function (err, data) {
