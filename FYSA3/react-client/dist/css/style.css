@@ -2,7 +2,9 @@
 html {
   overflow-x: hidden;
 }
-
+.userorders {
+  margin-top: 150px;
+}
 .font-size-10 {
   font-size: 10px;
 }
@@ -1409,8 +1411,8 @@ h5,
   position: relative;
 }
 
-.order-date{
-  background: #e6e6fa
+.order-date {
+  background: #e6e6fa;
 }
 
 .info {
@@ -2198,7 +2200,7 @@ form .form-control {
   padding-right: 20px;
   border-color: transparent;
   margin-right: 10px;
-  background:  hsl(240deg 67% 94%);;
+  background: hsl(240deg 67% 94%);
 }
 form .form-control:active,
 form .form-control:focus {
@@ -2212,7 +2214,6 @@ form textarea {
   height: auto !important;
   padding-top: 10px !important;
   padding-bottom: 10px !important;
-  
 }
 
 form .btn {
