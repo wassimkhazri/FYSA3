@@ -20,6 +20,8 @@ class Order extends React.Component {
             <br></br>
             <input type="text" class="form-control" placeholder="Date"></input>
             <br></br>
+            <input type="text" class="form-control" placeholder="Position"></input>
+            <br></br>
           </div>
           <input
             type="submit"
