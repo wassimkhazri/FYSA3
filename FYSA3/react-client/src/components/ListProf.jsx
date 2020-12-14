@@ -54,7 +54,7 @@ class ListProf extends React.Component {
         </form>
         {this.state.prof}
         {this.state.workers.map((worker, index) => (
-          <p>{worker.userName}</p>
+          <p>{worker.username}</p>
         ))}
       </div>
     );

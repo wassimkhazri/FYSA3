@@ -15,40 +15,38 @@ db.once("open", function () {
 });
 
 var workerSchema = mongoose.Schema({
-  userName: {
+  username: {
     type: String,
-    max: 255,
     required: true,
     unique: true
   },
-  firstName: String,
-  lastName: String,
+  first_name: String,
+  last_name: String,
   email: String,
   phone: Number,
   location: String,
   prof: String,
   rate: Number,
-  password: { 
-    type: String, 
-    required: true 
+  password: {
+    type: String,
+    required: true
   },
   infos: String
 });
 var userSchema = mongoose.Schema({
-  userName: {
+  username: {
     type: String,
-    max: 255,
     required: true,
     unique: true
   },
-  firstName: String,
-  lastName: String,
+  first_name: String,
+  last_name: String,
   email: String,
   phone: Number,
   location: String,
-  password: { 
-    type: String, 
-    required: true 
+  password: {
+    type: String,
+    required: true
   }
 });
 var orderSchema = mongoose.Schema({
@@ -57,13 +55,13 @@ var orderSchema = mongoose.Schema({
   userName: String,
   date: String,
   state: String,
-  location: String,
-  img: String
+  location: String
 });
 
 var profSchema = mongoose.Schema({
   name: String,
-  workers: Array
+  workers: Array,
+  img: String
 });
 
 var Worker = mongoose.model("Worker", workerSchema);
@@ -99,7 +97,7 @@ var selectWorkers = function (myWorker, callback) {
 };
 
 var selectOneWorker = function (worker, callback) {
-  Worker.findOne({ userName: worker.userName }, function (err, result) {
+  Worker.findOne({ username: worker.username }, function (err, result) {
     if (err) {
       console.log("error while searching worker");
       callback(err, null);
@@ -115,7 +113,7 @@ var selectOneWorker = function (worker, callback) {
 
 var selectOneUser = function (user, callback) {
   console.log("Yooo");
-  User.findOne({ userName: user.userName }, function (err, result) {
+  User.findOne({ username: user.username }, function (err, result) {
     if (err) {
       console.log("error while searching user");
       callback(err, null);
@@ -146,17 +144,17 @@ const addWorker = function (worker, callback) {
 };
 
 const addUser = function (user, callback) {
-  let profile = new User(user);
   bcrypt.genSalt(10, function (err, salt) {
-    bcrypt.hash(profile.password, salt, function (err, hash) {
-      profile.password = hash;
-      profile.save((err, profile) => {
-        if (err) {
+    bcrypt.hash(user.password, salt, function (err, hash) {
+      user.password = hash;
+      User.create(user)
+        .then((res) => {
+          callback(null, res);
+        })
+        .catch((err) => {
+          console.log(err);
           callback(err, null);
-        } else {
-          callback(null, profile);
-        }
-      });
+        });
     });
   });
 };
