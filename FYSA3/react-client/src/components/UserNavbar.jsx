@@ -37,7 +37,7 @@ class UserNavbar extends React.Component {
                     <li className="active">
                       <a
                         onClick={() => {
-                          this.props.handleClick("user-feed");
+                          this.props.handleClick("home");
                         }}
                         className="nav-link">
                         Home
@@ -45,13 +45,13 @@ class UserNavbar extends React.Component {
                     </li>
                     <li
                       onClick={() => {
-                        this.props.handleClick("");
+                        this.props.handleClick("profile");
                       }}>
                       <a className="nav-link">Profil</a>
                     </li>
                     <li
                       onClick={() => {
-                        this.props.handleClick("");
+                        this.props.handleClick("orders");
                       }}>
                       <a className="nav-link">Orders</a>
                     </li>

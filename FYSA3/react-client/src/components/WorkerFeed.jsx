@@ -89,7 +89,7 @@ class WorkerFeed extends React.Component {
                   return (
                     <tr>
                       <th scope="row">{index}</th>
-                      <td>{element.userName}</td>
+                      <td>{element.user_id.username}</td>
                       <td>{element.location}</td>
                       <td>{element.date}</td>
                       <td>
@@ -125,7 +125,7 @@ class WorkerFeed extends React.Component {
                   return (
                     <tr>
                       <th scope="row">{index}</th>
-                      <td>{element.userName}</td>
+                      <td>{element.user_id.username}</td>
                       <td>{element.location}</td>
                       <td>{element.date}</td>
                       <td>
@@ -160,7 +160,7 @@ class WorkerFeed extends React.Component {
                   return (
                     <tr>
                       <th scope="row">{index}</th>
-                      <td>{element.userName}</td>
+                      <td>{element.user_id.username}</td>
                       <td>{element.location}</td>
                       <td>{element.date}</td>
                     </tr>
@@ -172,7 +172,12 @@ class WorkerFeed extends React.Component {
         </div>
       );
     } else {
-      return <WorkerMyProfile data={this.props.data} />;
+      return (
+        <WorkerMyProfile
+          handleClick={this.handleClick}
+          data={this.props.data}
+        />
+      );
     }
   }
 }

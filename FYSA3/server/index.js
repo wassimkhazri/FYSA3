@@ -14,7 +14,9 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + "/../react-client/dist"));
 
 app.get("/api/profs", function (req, res) {
+  console.log("here");
   db.selectAllProf(function (err, data) {
+    console.log(data, err);
     if (err) {
       res.sendStatus(500);
     } else {
@@ -23,16 +25,7 @@ app.get("/api/profs", function (req, res) {
   });
 });
 
-app.post("/api/workers", function (req, res) {
-  db.selectWorkers(req.body.prof, function (err, data) {
-    if (err) {
-      res.sendStatus(500);
-    } else {
-      console.log("data", data);
-      res.json(data);
-    }
-  });
-});
+
 
 app.post("/login", (req, res) => {
   let givenPassword = req.body.password;
