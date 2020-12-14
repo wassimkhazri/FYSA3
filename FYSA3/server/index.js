@@ -137,6 +137,39 @@ app.post("/api/orders/done", function (req, res) {
     }
   });
 });
+app.post("/api/orders/user/panding", function (req, res) {
+  console.log(req.body.data);
+  db.selectUserPandingOrders(req.body.data, function (err, data) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+});
+app.post("/api/orders/user/doing", function (req, res) {
+  console.log(req.body.data);
+  db.selectUserDoingOrders(req.body.data, function (err, data) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+});
+app.post("/api/orders/user/done", function (req, res) {
+  console.log(req.body.data);
+  db.selectUserDoneOrders(req.body.data, function (err, data) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+});
 app.put("/order/update", function (req, res) {
   console.log(req.body);
   db.updateOrder(req.body, function (err, data) {
