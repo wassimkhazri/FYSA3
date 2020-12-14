@@ -63,7 +63,7 @@ class App extends React.Component {
     } else if (this.state.view === "worker-signup") {
       return (
         <div>
-          <Register />
+          <Register handleSubmit={this.handleClick} />
         </div>
       );
     } else if (this.state.view === "worker-feed") {

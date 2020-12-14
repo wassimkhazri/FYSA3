@@ -144,7 +144,6 @@ class WorkerProfile extends React.Component {
                   </div>
                 </div>
               </div>
-              <p></p>
               <Order />
             </div>
           </div>
