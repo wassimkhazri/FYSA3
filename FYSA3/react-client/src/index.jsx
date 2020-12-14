@@ -50,7 +50,7 @@ class App extends React.Component {
       });
   }
   render() {
-    if (this.state.view === "home") {
+      if (this.state.view === "home") {
       return (
         <Home handleClick={this.handleClick} handleLogin={this.handleLogin} />
       );

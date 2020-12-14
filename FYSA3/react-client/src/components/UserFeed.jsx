@@ -3,6 +3,7 @@ import UserNavbar from "./UserNavbar.jsx";
 import axios from "axios";
 import WorkersList from "./WorkersList.jsx";
 import WorkerProfile from "./WorkerProfile.jsx";
+import UserMyProfile from "./UserMyProfile.jsx";
 
 class UserFeed extends React.Component {
   constructor(props) {
@@ -89,7 +90,10 @@ class UserFeed extends React.Component {
           />
         </div>
       );
-    }
+    } else{
+      return <UserMyProfile data={this.props.data} />;
+
+    } 
   }
 }
 export default UserFeed;

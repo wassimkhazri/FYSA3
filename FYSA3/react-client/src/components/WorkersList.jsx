@@ -14,11 +14,10 @@ class WorkersList extends React.Component {
           <div className="container">
             <div className="row justify-content-center text-center mb-5 section-2-title">
               <div className="col-md-6">
-                <h2 className="mb-4">Meet Our Team</h2>
+                <h2 className="mb-4">Workers Who Are Available</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Reiciendis provident eius ratione velit, voluptas laborum nemo
-                  quas ad necessitatibus placeat?
+                  All you need is to choose a worker and send him 
+                  an order and waiting for his accept
                 </p>
               </div>
             </div>
@@ -40,15 +39,15 @@ class WorkersList extends React.Component {
                       />
 
                       <div className="post-entry-1-contents">
-                        <span className="meta">Founder</span>
+                        <span className="meta">{element.prof}</span>
                         <h2>
                           {element.first_name}
                           {element.last_name}
                         </h2>
-                        <p>
+                        {/* <p>
                           Lorem ipsum dolor sit amet, consectetur adipisicing
                           elit. Ipsa, sapiente.
-                        </p>
+                        </p> */}
                       </div>
                     </div>
                   </div>

@@ -161,7 +161,7 @@ class WorkerRegister extends Component {
                           <input
                             onClick={this.handleClick}
                             type="submit"
-                            value="Send Message"
+                            value="Create Profile"
                             className="btn btn-primary px-5"
                           />
                         </div>
