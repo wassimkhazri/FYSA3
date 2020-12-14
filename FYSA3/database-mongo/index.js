@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var bcrypt = require("bcryptjs");
 mongoose.connect(
   "mongodb+srv://user:Y0QIFKndntB1HIz3@cluster0.efioa.mongodb.net/DIGITAL-DEALERS?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true }
@@ -14,25 +15,39 @@ db.once("open", function () {
 });
 
 var workerSchema = mongoose.Schema({
-  userName: String,
-  firstName: String,
-  lastName: String,
+  username: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  first_name: String,
+  last_name: String,
   email: String,
   phone: Number,
   location: String,
   prof: String,
   rate: Number,
-  password: String,
+  password: {
+    type: String,
+    required: true
+  },
   infos: String
 });
 var userSchema = mongoose.Schema({
-  userName: String,
-  firstName: String,
-  lastName: String,
+  username: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  first_name: String,
+  last_name: String,
   email: String,
   phone: Number,
   location: String,
-  password: String
+  password: {
+    type: String,
+    required: true
+  }
 });
 var orderSchema = mongoose.Schema({
   userId: String,
@@ -40,13 +55,13 @@ var orderSchema = mongoose.Schema({
   userName: String,
   date: String,
   state: String,
-  location: String,
-  img: String
+  location: String
 });
 
 var profSchema = mongoose.Schema({
   name: String,
-  workers: Array
+  workers: Array,
+  img: String
 });
 
 var Worker = mongoose.model("Worker", workerSchema);
@@ -82,39 +97,65 @@ var selectWorkers = function (myWorker, callback) {
 };
 
 var selectOneWorker = function (worker, callback) {
-  Worker.findOne(
-    { userName: worker.userName, password: worker.password },
-    function (err, Worker) {
-      if (err) {
-        callback(err, null);
-      } else {
-        console.log(worker);
-        callback(null, Worker);
-      }
-    }
-  );
-};
-var selectOneUser = function (user, callback) {
-  User.findOne(
-    { userName: user.userName, password: user.password },
-    function (err, user) {
-      if (err) {
-        callback(err, null);
-      } else {
-        console.log(user);
-        callback(null, user);
-      }
-    }
-  );
-};
-const addWorker = function (worker, callback) {
-  var profile = new Worker(worker);
-  profile.save((err, profile) => {
+  Worker.findOne({ username: worker.username }, function (err, result) {
     if (err) {
+      console.log("error while searching worker");
       callback(err, null);
     } else {
-      callback(null, profile);
+      // if (result) {
+      // }
+      console.log("db: Worker found:");
+      console.log(result);
+      callback(null, result);
     }
+  });
+};
+
+var selectOneUser = function (user, callback) {
+  console.log("Yooo");
+  User.findOne({ username: user.username }, function (err, result) {
+    if (err) {
+      console.log("error while searching user");
+      callback(err, null);
+    } else {
+      // if (result) {
+      // }
+      console.log("db: User found:");
+      console.log(result);
+      callback(null, result);
+    }
+  });
+};
+
+const addWorker = function (worker, callback) {
+  var profile = new Worker(worker);
+  bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.hash(profile.password, salt, function (err, hash) {
+      profile.password = hash;
+      profile.save((err, profile) => {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, profile);
+        }
+      });
+    });
+  });
+};
+
+const addUser = function (user, callback) {
+  bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.hash(user.password, salt, function (err, hash) {
+      user.password = hash;
+      User.create(user)
+        .then((res) => {
+          callback(null, res);
+        })
+        .catch((err) => {
+          console.log(err);
+          callback(err, null);
+        });
+    });
   });
 };
 
@@ -169,6 +210,7 @@ var updateOrder = function (data, callback) {
   );
 };
 module.exports.addWorker = addWorker;
+module.exports.addUser = addUser;
 module.exports.updateOrder = updateOrder;
 module.exports.selectOneUser = selectOneUser;
 module.exports.selectAllProf = selectAllProf;
