@@ -26,9 +26,10 @@ class WorkersList extends React.Component {
             {this.props.data.map((element) => {
               return (
                 <div
-                  onClick={() =>
-                    this.props.handleProfileClick("worker-profile", element)
-                  }
+                  onClick={() => {
+                    this.props.handleProfileClick(element);
+                    this.props.handleClick("worker-profile");
+                  }}
                   className="row align-items-stretch">
                   <div className="col-lg-4 col-md-6 mb-5">
                     <div className="post-entry-1 h-100 person-1">
@@ -41,8 +42,8 @@ class WorkersList extends React.Component {
                       <div className="post-entry-1-contents">
                         <span className="meta">Founder</span>
                         <h2>
-                          {element.firstName}
-                          {element.lastName}
+                          {element.first_name}
+                          {element.last_name}
                         </h2>
                         <p>
                           Lorem ipsum dolor sit amet, consectetur adipisicing
