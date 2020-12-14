@@ -2,7 +2,7 @@ import React from "react";
 import UserNavbar from "./UserNavbar.jsx";
 import axios from "axios";
 import WorkersList from "./WorkersList.jsx";
-import WorkerProfile from "./WorkerProfile.jsx";
+import WorkerPrfile from "./WorkerProfile.jsx";
 
 class UserFeed extends React.Component {
   constructor(props) {

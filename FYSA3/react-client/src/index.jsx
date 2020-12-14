@@ -41,7 +41,7 @@ class App extends React.Component {
           console.log(user);
         } else {
           this.setState({
-            view: "home"  
+            view: "home"
           });
         }
       })
