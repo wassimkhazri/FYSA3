@@ -28,9 +28,9 @@ var workerSchema = mongoose.Schema({
   location: String,
   prof: String,
   rate: Number,
-  password: { 
-    type: String, 
-    required: true 
+  password: {
+    type: String,
+    required: true
   },
   infos: String
 });
@@ -46,9 +46,9 @@ var userSchema = mongoose.Schema({
   email: String,
   phone: Number,
   location: String,
-  password: { 
-    type: String, 
-    required: true 
+  password: {
+    type: String,
+    required: true
   }
 });
 var orderSchema = mongoose.Schema({
@@ -189,8 +189,18 @@ var selectWorkerDoingOrders = function (data, callback) {
     }
   });
 };
+
 var selectWorkerDoneOrders = function (data, callback) {
   Order.find({ workerId: data, state: "done" }, function (err, orders) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, orders);
+    }
+  });
+};
+var selectUserOrders = function (data, callback) {
+  Order.find({ userId: data, state: "done" }, function (err, orders) {
     if (err) {
       callback(err, null);
     } else {
@@ -211,6 +221,7 @@ var updateOrder = function (data, callback) {
     }
   );
 };
+module.exports.selectUserOrders = selectUserOrders;
 module.exports.addWorker = addWorker;
 module.exports.addUser = addUser;
 module.exports.updateOrder = updateOrder;
