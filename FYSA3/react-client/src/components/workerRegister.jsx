@@ -41,9 +41,10 @@ class WorkerRegister extends Component {
     delete data.profs;
     console.log(data);
     axios
-      .post("/register", { data })
+      .post("/workerRegister", { data })
       .then((res) => {
         console.log(res.data);
+        this.props.handleSubmit("home");
       })
       .catch((err) => {
         console.log("There's an error", err);
@@ -161,7 +162,7 @@ class WorkerRegister extends Component {
                           <input
                             onClick={this.handleClick}
                             type="submit"
-                            value="Send Message"
+                            value="Create Profile"
                             className="btn btn-primary px-5"
                           />
                         </div>

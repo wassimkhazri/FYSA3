@@ -14,21 +14,12 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + "/../react-client/dist"));
 
 app.get("/api/profs", function (req, res) {
+  console.log("here");
   db.selectAllProf(function (err, data) {
+    console.log(data, err);
     if (err) {
       res.sendStatus(500);
     } else {
-      res.json(data);
-    }
-  });
-});
-
-app.post("/api/workers", function (req, res) {
-  db.selectWorkers(req.body.prof, function (err, data) {
-    if (err) {
-      res.sendStatus(500);
-    } else {
-      console.log("data", data);
       res.json(data);
     }
   });
@@ -63,6 +54,7 @@ app.post("/login", (req, res) => {
           }
         });
       } else {
+        console.log(worker);
         bcrypt.compare(givenPassword, worker.password, function (err, result) {
           if (err) {
             console.log("compare error", err);
@@ -80,7 +72,7 @@ app.post("/login", (req, res) => {
 
 app.post("/workerRegister", (req, res) => {
   console.log(req.body);
-  var data = req.body;
+  var data = req.body.data;
   data.rate = 0;
   db.addWorker(data, (err, worker) => {
     if (err) {

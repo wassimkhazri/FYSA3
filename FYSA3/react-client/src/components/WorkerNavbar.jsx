@@ -53,7 +53,7 @@ class WorkerNavbar extends React.Component {
                       onClick={() => {
                         this.props.handleClick("");
                       }}>
-                      <a className="nav-link">Orders</a>
+                      <a className="nav-link">Log Out</a>
                     </li>
                   </ul>
                 </nav>
