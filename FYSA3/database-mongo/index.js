@@ -190,7 +190,7 @@ var selectAllOrders = function (callback) {
 };
 
 var selectWorkerPandingOrders = function (data, callback) {
-  Order.find({ worker_id: data, state: "panding" })
+  Order.find({ worker_id: data, state: "pending" })
     .populate("user_id")
     .exec((err, orders) => {
       if (err) {
@@ -223,33 +223,16 @@ var selectWorkerDoneOrders = function (data, callback) {
     });
 };
 
-var selectUserPandingOrders = function (data, callback) {
-  Order.find({ user_id: data, state: "panding" }, function (err, orders) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, orders);
-    }
-  });
-};
-var selectUserDoingOrders = function (data, callback) {
-  Order.find({ user_id: data, state: "doing" }, function (err, orders) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, orders);
-    }
-  });
-};
-
-var selectUserDoneOrders = function (data, callback) {
-  Order.find({ user_id: data, state: "done" }, function (err, orders) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, orders);
-    }
-  });
+var selectUserOrders = function (data, callback) {
+  Order.find({ user_id: data })
+    .populate("worker_id")
+    .exec((err, orders) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, orders);
+      }
+    });
 };
 
 var updateOrder = function (data, callback) {
@@ -276,6 +259,4 @@ module.exports.selectAllOrders = selectAllOrders;
 module.exports.selectWorkerPandingOrders = selectWorkerPandingOrders;
 module.exports.selectWorkerDoingOrders = selectWorkerDoingOrders;
 module.exports.selectWorkerDoneOrders = selectWorkerDoneOrders;
-module.exports.selectUserPandingOrders = selectUserPandingOrders;
-module.exports.selectUserDoingOrders = selectUserDoingOrders;
-module.exports.selectUserDoneOrders = selectUserDoneOrders;
+module.exports.selectUserOrders = selectUserOrders;

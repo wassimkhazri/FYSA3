@@ -9,7 +9,7 @@ class Order extends React.Component {
       worker_id: this.props.worker._id,
       info: "",
       date: "",
-      state: "panding",
+      state: "pending",
       location: ""
     };
     this.handleClick = this.handleClick.bind(this);

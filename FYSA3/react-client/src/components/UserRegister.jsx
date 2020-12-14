@@ -25,8 +25,9 @@ class UserRegister extends Component {
     var data = this.state;
     console.log(data);
     axios
-      .post("/register/user", { data })
+      .post("/userRegister", { data })
       .then((res) => {
+        this.props.handleSubmit("home");
         console.log(res.data);
       })
       .catch((err) => {
@@ -133,11 +134,12 @@ class UserRegister extends Component {
                           />
                         </div>
                         <div className="form-group">
-                          <input
-                            type="submit"
+                          <button
+                            onClick={this.handleClick}
                             value="Create Profile"
-                            className="btn btn-primary px-5"
-                          />
+                            className="btn btn-primary px-5">
+                            Create Profile
+                          </button>
                         </div>
                       </form>
                     </div>

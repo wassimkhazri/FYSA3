@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Register from "./components/workerRegister.jsx";
+import workerRegister from "./components/workerRegister.jsx";
 import UserRegister from "./components/UserRegister.jsx";
 import Home from "./components/Home.jsx";
 import WorkerLogin from "./components/Login.jsx";
@@ -57,13 +57,13 @@ class App extends React.Component {
     } else if (this.state.view === "user-signup") {
       return (
         <div>
-          <UserRegister />
+          <UserRegister handleSubmit={this.handleClick} />
         </div>
       );
     } else if (this.state.view === "worker-signup") {
       return (
         <div>
-          <Register handleSubmit={this.handleClick} />
+          <workerRegister handleSubmit={this.handleClick} />
         </div>
       );
     } else if (this.state.view === "worker-feed") {
