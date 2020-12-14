@@ -10,7 +10,7 @@ class WorkerMyProfile extends React.Component {
   render() {
     return (
       <div>
-        <WorkerNavbar />
+        <WorkerNavbar handleClick={this.props.handleClick} />
         <div className="WorkerMyProfile ">
           <div className="container emp-profile  ">
             <form method="post">

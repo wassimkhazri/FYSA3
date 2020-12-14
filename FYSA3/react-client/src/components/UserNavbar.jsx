@@ -51,7 +51,7 @@ class UserNavbar extends React.Component {
                     </li>
                     <li
                       onClick={() => {
-                        this.props.handleClick("");
+                        this.props.handleClick("orders");
                       }}>
                       <a className="nav-link">Orders</a>
                     </li>
