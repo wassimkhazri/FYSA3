@@ -63,6 +63,7 @@ app.post("/login", (req, res) => {
           }
         });
       } else {
+        console.log(worker);
         bcrypt.compare(givenPassword, worker.password, function (err, result) {
           if (err) {
             console.log("compare error", err);
