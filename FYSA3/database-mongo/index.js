@@ -58,6 +58,7 @@ var orderSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Worker"
   },
+  info: String,
   date: String,
   state: String,
   location: String
@@ -139,6 +140,16 @@ const addWorker = function (worker, callback) {
         }
       });
     });
+  });
+};
+const addOrder = function (order, callback) {
+  var myorder = new Order(order);
+  myorder.save((err, order) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, order);
+    }
   });
 };
 
@@ -226,6 +237,7 @@ var updateOrder = function (data, callback) {
 };
 module.exports.addWorker = addWorker;
 module.exports.addUser = addUser;
+module.exports.addOrder = addOrder;
 module.exports.updateOrder = updateOrder;
 module.exports.selectOneUser = selectOneUser;
 module.exports.selectAllProf = selectAllProf;

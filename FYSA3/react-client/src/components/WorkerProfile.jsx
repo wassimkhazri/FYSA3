@@ -22,22 +22,10 @@ class WorkerProfile extends React.Component {
           <UserNavbar handleClick={this.props.handleClick} />
           <div className="col-md-4 sidebar">
             <div className="sidebar-box">
-              <form action="#" className="search-form">
-                <div className="form-group">
-                  <span className="icon fa fa-search"></span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Type a keyword and hit enter"
-                  />
-                </div>
-              </form>
-            </div>
-            <div className="sidebar-box">
               <img
                 src="images/person_1.jpg"
                 alt="Free Website Template by Free-Template.co"
-                className="img-fluid mb-4 w-50 rounded-circle"
+                className="img-fluid mb-4 w-10 rounded-circle"
               />
               <div className="info">
                 <h2 className="text-black mb-4">Contact Info</h2>
@@ -73,36 +61,24 @@ class WorkerProfile extends React.Component {
                     </h3>
                   </div>
                 </div>
+                <p>
+                  <a
+                    href="#"
+                    className="btn btn-primary btn-md text-white orderbtn"
+                    onClick={this.order}>
+                    Order
+                  </a>
+                </p>
               </div>
-              <p>
-                <a
-                  href="#"
-                  className="btn btn-primary btn-md text-white"
-                  onClick={this.order}>
-                  Order
-                </a>
-              </p>
             </div>
           </div>
         </div>
       );
     } else {
       return (
-        <div>
+        <div className="row">
           <UserNavbar handleClick={this.props.handleClick} />
           <div className="col-md-4 sidebar">
-            <div className="sidebar-box">
-              <form action="#" className="search-form">
-                <div className="form-group">
-                  <span className="icon fa fa-search"></span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Type a keyword and hit enter"
-                  />
-                </div>
-              </form>
-            </div>
             <div className="sidebar-box">
               <img
                 src="images/person_1.jpg"
@@ -144,8 +120,10 @@ class WorkerProfile extends React.Component {
                   </div>
                 </div>
               </div>
-              <Order />
             </div>
+          </div>
+          <div className="col-md-4 orderform">
+            <Order user={this.props.user} worker={this.props.data} />
           </div>
         </div>
       );

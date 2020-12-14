@@ -83,7 +83,18 @@ app.post("/workerRegister", (req, res) => {
     }
   });
 });
-
+app.post("/addorder", (req, res) => {
+  console.log(req.body);
+  var data = req.body.data;
+  db.addOrder(data, (err, order) => {
+    if (err) {
+      res.send("Order not created");
+    } else {
+      console.log("order created successfully");
+      res.json(order);
+    }
+  });
+});
 app.post("/userRegister", (req, res) => {
   db.addUser(req.body, (err, user) => {
     if (err) {

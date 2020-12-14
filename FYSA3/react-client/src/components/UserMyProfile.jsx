@@ -10,7 +10,7 @@ class UserMyProfile extends React.Component {
   render() {
     return (
       <div>
-        <UserNavbar />
+        <UserNavbar handleClick={this.props.handleClick} />
         <div className="UserMyProfile ">
           <div className="container emp-profile  ">
             <form method="post">
@@ -30,8 +30,7 @@ class UserMyProfile extends React.Component {
                 <div className="col-md-6">
                   <div className="profile-head">
                     <h5>
-                      {this.props.data.first_name}{" "}
-                      {this.props.data.last_name}
+                      {this.props.data.first_name} {this.props.data.last_name}
                     </h5>
                     <h6>User</h6>
                     <ul className="nav nav-tabs" id="myTab" role="tablist">
@@ -104,7 +103,7 @@ class UserMyProfile extends React.Component {
                         </div>
                       </div>
                       <div className="row">
-                      <div className="col-md-6">
+                        <div className="col-md-6">
                           <label>Location</label>
                         </div>
                         <div className="col-md-6">

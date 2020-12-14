@@ -13,7 +13,7 @@ class UserFeed extends React.Component {
       profs: [],
       current: [],
       currentprofile: {},
-      view: "profs"
+      view: "home"
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleProfileClick = this.handleProfileClick.bind(this);
@@ -39,7 +39,7 @@ class UserFeed extends React.Component {
   }
 
   render() {
-    if (this.state.view === "profs") {
+    if (this.state.view === "home") {
       return (
         <div>
           <UserNavbar handleClick={this.handleClick} />
@@ -86,12 +86,15 @@ class UserFeed extends React.Component {
         <div>
           <WorkerProfile
             handleClick={this.handleClick}
+            user={this.state.user}
             data={this.state.currentprofile}
           />
         </div>
       );
     } else {
-      return <UserMyProfile data={this.props.data} />;
+      return (
+        <UserMyProfile handleClick={this.handleClick} data={this.props.data} />
+      );
     }
   }
 }
