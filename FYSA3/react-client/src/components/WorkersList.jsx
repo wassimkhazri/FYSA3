@@ -41,8 +41,8 @@ class WorkersList extends React.Component {
                       <div className="post-entry-1-contents">
                         <span className="meta">Founder</span>
                         <h2>
-                          {element.firstName}
-                          {element.lastName}
+                          {element.first_name}
+                          {element.last_name}
                         </h2>
                         <p>
                           Lorem ipsum dolor sit amet, consectetur adipisicing

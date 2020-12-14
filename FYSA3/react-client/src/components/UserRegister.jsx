@@ -5,9 +5,9 @@ class UserRegister extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: "",
-      firstName: "",
-      lastName: "",
+      username: "",
+      first_name: "",
+      last_name: "",
       email: "",
       phone: "",
       location: "",
@@ -64,8 +64,8 @@ class UserRegister extends Component {
                         <div className="form-group">
                           <input
                             type="text"
-                            value={this.state.userName}
-                            name="userName"
+                            value={this.state.username}
+                            name="username"
                             onChange={this.handleChange}
                             onChange={this.handleChange}
                             className="form-control"
@@ -75,8 +75,8 @@ class UserRegister extends Component {
                         <div className="form-group">
                           <input
                             type="text"
-                            value={this.state.firstName}
-                            name="firstName"
+                            value={this.state.first_name}
+                            name="first_name"
                             onChange={this.handleChange}
                             className="form-control"
                             placeholder="First Name"
@@ -85,8 +85,8 @@ class UserRegister extends Component {
                         <div className="form-group">
                           <input
                             type="text"
-                            value={this.state.LastName}
-                            name="LastName"
+                            value={this.state.last_name}
+                            name="last_name"
                             onChange={this.handleChange}
                             className="form-control"
                             placeholder="Last Name"

@@ -1,6 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var db = require("../database-mongo");
+var bcrypt = require("bcryptjs");
 
 var app = express();
 app.use(
@@ -34,6 +35,7 @@ app.post("/api/workers", function (req, res) {
 });
 
 app.post("/login", (req, res) => {
+  let givenPassword = req.body.password;
   console.log(req.body);
   db.selectOneWorker(req.body, (err, worker) => {
     if (err) {
@@ -44,26 +46,60 @@ app.post("/login", (req, res) => {
           if (err) {
             res.sendStatus(500);
           } else {
+            bcrypt.compare(
+              givenPassword,
+              user.password,
+              function (err, result) {
+                if (err) {
+                  console.log("compare error", err);
+                } else if (result) {
+                  console.log("user password matches.", result);
+                  // isLoggedIn = result;
+                  // To do: if compare true user must be redirected to feed
+                }
+              }
+            );
             res.send(user);
           }
         });
       } else {
+        bcrypt.compare(givenPassword, worker.password, function (err, result) {
+          if (err) {
+            console.log("compare error", err);
+          } else {
+            console.log("worker password matches", result);
+            isLoggedIn = result;
+            // To do: if compare true worker must be redirected to feed
+          }
+        });
         res.send(worker);
       }
     }
   });
 });
 
-app.post("/register", (req, res) => {
-  console.log(req.body.data);
-  var data = req.body.data;
+app.post("/workerRegister", (req, res) => {
+  console.log(req.body);
+  var data = req.body;
   data.rate = 0;
   db.addWorker(data, (err, worker) => {
     if (err) {
-      res.send("user not created");
+      res.send("Worker not created");
     } else {
+      console.log("Worker created successfully");
       res.json(worker);
     }
+  });
+});
+
+app.post("/userRegister", (req, res) => {
+  db.addUser(req.body, (err, user) => {
+    if (err) {
+      res.send("User not created");
+    } else {
+      res.json(user);
+    }
+    console.log("User created successfully");
   });
 });
 
@@ -76,7 +112,83 @@ app.get("/orders", function (req, res) {
     }
   });
 });
-
+app.post("/api/orders/panding", function (req, res) {
+  console.log(req.body.data);
+  db.selectWorkerPandingOrders(req.body.data, function (err, data) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+});
+app.post("/api/orders/doing", function (req, res) {
+  console.log(req.body.data);
+  db.selectWorkerDoingOrders(req.body.data, function (err, data) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+});
+app.post("/api/orders/done", function (req, res) {
+  console.log(req.body.data);
+  db.selectWorkerDoneOrders(req.body.data, function (err, data) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+});
+app.post("/api/orders/user/panding", function (req, res) {
+  console.log(req.body.data);
+  db.selectUserPandingOrders(req.body.data, function (err, data) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+});
+app.post("/api/orders/user/doing", function (req, res) {
+  console.log(req.body.data);
+  db.selectUserDoingOrders(req.body.data, function (err, data) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+});
+app.post("/api/orders/user/done", function (req, res) {
+  console.log(req.body.data);
+  db.selectUserDoneOrders(req.body.data, function (err, data) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+});
+app.put("/order/update", function (req, res) {
+  console.log(req.body);
+  db.updateOrder(req.body, function (err, data) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+});
 app.listen(3000, function () {
   console.log("listening on port 3000!");
 });
