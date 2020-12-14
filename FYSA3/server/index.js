@@ -110,7 +110,50 @@ app.get("/orders", function (req, res) {
     }
   });
 });
-
+app.post("/api/orders/panding", function (req, res) {
+  console.log(req.body.data);
+  db.selectWorkerPandingOrders(req.body.data, function (err, data) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+});
+app.post("/api/orders/doing", function (req, res) {
+  console.log(req.body.data);
+  db.selectWorkerDoingOrders(req.body.data, function (err, data) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+});
+app.post("/api/orders/done", function (req, res) {
+  console.log(req.body.data);
+  db.selectWorkerDoneOrders(req.body.data, function (err, data) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+});
+app.put("/order/update", function (req, res) {
+  console.log(req.body);
+  db.updateOrder(req.body, function (err, data) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+});
 app.listen(3000, function () {
   console.log("listening on port 3000!");
 });
