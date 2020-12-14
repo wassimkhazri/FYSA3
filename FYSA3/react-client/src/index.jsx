@@ -89,6 +89,7 @@ class App extends React.Component {
           <UserFeed
             handleClickProf={this.handleClickProf}
             handleClick={this.handleClick}
+            data={this.state.profile}
           />
         </div>
       );

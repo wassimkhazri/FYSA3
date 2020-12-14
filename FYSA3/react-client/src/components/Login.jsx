@@ -5,7 +5,7 @@ class WorkerLogin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: "",
+      username: "",
       password: ""
     };
     this.handleChange = this.handleChange.bind(this);
@@ -25,8 +25,8 @@ class WorkerLogin extends React.Component {
                 <input
                   type="text"
                   className="form-control"
-                  value={this.state.userName}
-                  name="userName"
+                  value={this.state.username}
+                  name="username"
                   onChange={this.handleChange}
                   placeholder="Name"
                 />
