@@ -60,8 +60,8 @@ class WorkerProfile extends React.Component {
               className="img-fluid mb-4 w-50 rounded-circle"
             />
             <h3 className="text-black">
-              {this.props.data.firstName}
-              {this.props.data.LastName}
+              {this.props.data.first_name}
+              {this.props.data.last_name}
             </h3>
             <p>
               Even the all-powerful Pointing has no control about the blind
