@@ -27,6 +27,7 @@ class UserFeed extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props.data);
     axios
       .get("/api/profs")
       .then((res) => {

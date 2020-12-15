@@ -2,6 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var db = require("../database-mongo");
 var bcrypt = require("bcryptjs");
+var jwt = require("jsonwebtoken");
 
 var app = express();
 app.use(
@@ -28,48 +29,32 @@ app.get("/api/profs", function (req, res) {
 app.post("/login", (req, res) => {
   let givenPassword = req.body.password;
   console.log(req.body);
-  db.selectOneWorker(req.body, (err, worker) => {
+  db.selectOneWorker(req.body, async (err, worker) => {
     if (err) {
       res.sendStatus(500);
     } else {
       if (!worker) {
-        db.selectOneUser(req.body, (err, user) => {
+        db.selectOneUser(req.body, async (err, user) => {
           if (err) {
             res.sendStatus(500);
           } else {
-            let validPass = bcrypt.compare(
-              givenPassword,
-              user.password,
-              function (err, result) {
-                if (err) {
-                  console.log("compare error", err);
-                } else if (result) {
-                  console.log("user password matches.", result);
-                  // To do: if compare true user must be redirected to feed
-                }
-              }
-            );
-            if (!validPass) return res.send("Invalid password");
-            let token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-            res.status(200).header("auth-token", token), send(token);
+            let validPass = await bcrypt.compare(givenPassword, user.password);
+            if (!validPass) {
+              return res.send("Invalid password");
+            } else {
+              let token = jwt.sign({ _id: user._id }, "mysecrettoken");
+              res.status(200).header("auth-token", token).send({ token, user });
+            }
           }
         });
       } else {
-        let validPass = bcrypt.compare(
-          givenPassword,
-          worker.password,
-          function (err, result) {
-            if (err) {
-              console.log("compare error", err);
-            } else {
-              console.log("worker password matches", result);
-              // To do: if compare true worker must be redirected to feed
-            }
-          }
-        );
-        if (!validPass) return res.send("Invalid password");
-        let token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-        res.status(200).header("auth-token", token), send(token);
+        let validPass = await bcrypt.compare(givenPassword, worker.password);
+        if (!validPass) {
+          return res.send("Invalid password");
+        } else {
+          let token = jwt.sign({ _id: worker._id }, "mysecrettoken");
+          res.status(200).header("auth-token", token).send({ token, worker });
+        }
       }
     }
   });
@@ -189,6 +174,7 @@ app.put("/order/update", function (req, res) {
     }
   });
 });
+// var port = process.env.PORT || "3000";
 app.listen(3000, function () {
   console.log("listening on port 3000!");
 });
