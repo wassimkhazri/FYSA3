@@ -69,7 +69,18 @@ app.post("/login", (req, res) => {
     }
   });
 });
-
+app.put("/user/update", function (req, res) {
+  db.updateUser(req.body.data, (data) => {
+    console.log(data);
+    res.send(data);
+  });
+});
+app.put("/worker/update", function (req, res) {
+  db.updateWorker(req.body.data, (data) => {
+    console.log(data);
+    res.send(data);
+  });
+});
 app.post("/workerRegister", (req, res) => {
   console.log(req.body);
   var data = req.body.data;

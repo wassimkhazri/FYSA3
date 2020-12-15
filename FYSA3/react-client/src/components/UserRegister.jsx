@@ -68,7 +68,6 @@ class UserRegister extends Component {
                             value={this.state.username}
                             name="username"
                             onChange={this.handleChange}
-                            onChange={this.handleChange}
                             className="form-control"
                             placeholder="User name"
                           />

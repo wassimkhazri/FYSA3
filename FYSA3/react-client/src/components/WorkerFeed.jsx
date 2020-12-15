@@ -2,11 +2,13 @@ import React from "react";
 import WorkerNavbar from "./WorkerNavbar.jsx";
 import axios from "axios";
 import WorkerMyProfile from "./WorkerMyProfile.jsx";
+import WorkerUpdate from "./WorkerUpdate.jsx";
 
 class WorkerFeed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: this.props.data,
       pending: [],
       doing: [],
       done: [],
@@ -175,6 +177,13 @@ class WorkerFeed extends React.Component {
               </tbody>
             </table>
           </div>
+        </div>
+      );
+    } else if (this.state.view === "update") {
+      return (
+        <div>
+          <WorkerNavbar handleClick={this.handleClick} />
+          <WorkerUpdate handleClick={this.handleClick} user={this.state.user} />
         </div>
       );
     } else {

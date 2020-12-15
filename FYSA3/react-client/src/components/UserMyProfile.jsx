@@ -10,7 +10,7 @@ class UserMyProfile extends React.Component {
   render() {
     return (
       <div>
-        <UserNavbar handleClick={this.handleClick} />
+        <UserNavbar handleClick={this.props.handleClick} />
         <div className="UserMyProfile ">
           <div className="container emp-profile  ">
             <form method="post">
@@ -51,6 +51,7 @@ class UserMyProfile extends React.Component {
                 </div>
                 <div className="col-md-2">
                   <input
+                    onClick={() => this.props.handleClick("update")}
                     type="submit"
                     className="profile-edit-btn"
                     name="btnAddMore"

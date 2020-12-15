@@ -29,8 +29,9 @@ class WorkerMyProfile extends React.Component {
                 </div>
                 <div className="col-md-6">
                   <div className="profile-head">
-                    <h5>{this.props.data.first_name}{" "}
-                            {this.props.data.last_name}</h5>
+                    <h5>
+                      {this.props.data.first_name} {this.props.data.last_name}
+                    </h5>
                     <h6>{this.props.data.prof}</h6>
                     <p className="proile-rating">
                       RANKINGS : <span>8/10</span>
@@ -65,6 +66,7 @@ class WorkerMyProfile extends React.Component {
                 </div>
                 <div className="col-md-2">
                   <input
+                    onClick={() => this.props.handleClick("update")}
                     type="submit"
                     className="profile-edit-btn"
                     name="btnAddMore"
@@ -125,7 +127,7 @@ class WorkerMyProfile extends React.Component {
                         </div>
                       </div>
                       <div className="row">
-                      <div className="col-md-6">
+                        <div className="col-md-6">
                           <label>Location</label>
                         </div>
                         <div className="col-md-6">
