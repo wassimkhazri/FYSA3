@@ -54,6 +54,7 @@ class App extends React.Component {
         } else {
           this.setState({ user: user.data, view: "user-feed" });
         }
+        window.localStorage.setItem("auth-token", user.data.auth-token);
         console.log(this.state.user);
       })
       .catch((error) => {
