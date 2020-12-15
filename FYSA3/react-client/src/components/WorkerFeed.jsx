@@ -73,7 +73,10 @@ class WorkerFeed extends React.Component {
     if (this.state.view === "home") {
       return (
         <div className="workerfeed ">
-          <WorkerNavbar handleClick={this.handleClick} />
+          <WorkerNavbar
+            handlelog={this.props.handleClick}
+            handleClick={this.handleClick}
+          />
           <div className="pendingorders container">
             <h1>Pending Orders</h1>
             <table className="table table-striped orders">
@@ -182,13 +185,21 @@ class WorkerFeed extends React.Component {
     } else if (this.state.view === "update") {
       return (
         <div>
-          <WorkerNavbar handleClick={this.handleClick} />
-          <WorkerUpdate handleClick={this.handleClick} user={this.state.user} />
+          <WorkerNavbar
+            handlelog={this.props.handleClick}
+            handleClick={this.handleClick}
+          />
+          <WorkerUpdate
+            handlelog={this.props.handleClick}
+            handleClick={this.handleClick}
+            user={this.state.user}
+          />
         </div>
       );
     } else {
       return (
         <WorkerMyProfile
+          handlelog={this.props.handleClick}
           handleClick={this.handleClick}
           data={this.props.data}
         />

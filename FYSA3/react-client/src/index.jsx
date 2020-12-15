@@ -24,7 +24,21 @@ class App extends React.Component {
     this.setState({ view });
   }
 
-  componentDidMount() {}
+  async componentWillMount() {
+    var accessToken = window.localStorage.getItem("auth-token");
+    if (!accessToken) {
+      this.setState({ view: "home" });
+    } else {
+      console.log(accessToken);
+      let res = await axios.post("/login/auth", { data: accessToken });
+      if (res.data.prof) {
+        this.setState({ user: res.data, view: "worker-feed" });
+      } else {
+        this.setState({ user: res.data, view: "user-feed" });
+      }
+      console.log("this.data", res);
+    }
+  }
   handleLogin(user) {
     axios
       .post("/login", user)

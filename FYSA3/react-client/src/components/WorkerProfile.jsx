@@ -19,7 +19,10 @@ class WorkerProfile extends React.Component {
     if (!this.state.display) {
       return (
         <div>
-          <UserNavbar handleClick={this.props.handleClick} />
+          <UserNavbar
+            handlelog={this.props.handleClick}
+            handleClick={this.props.handleClick}
+          />
           <div className="col-md-4 sidebar">
             <div className="sidebar-box">
               <img
@@ -77,7 +80,10 @@ class WorkerProfile extends React.Component {
     } else {
       return (
         <div className="row">
-          <UserNavbar handleClick={this.props.handleClick} />
+          <UserNavbar
+            handlelog={this.props.handleClick}
+            handleClick={this.props.handleClick}
+          />
           <div className="col-md-4 sidebar">
             <div className="sidebar-box">
               <img
