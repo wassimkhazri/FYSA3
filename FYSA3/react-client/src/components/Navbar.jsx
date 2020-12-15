@@ -50,11 +50,6 @@ class Navbar extends React.Component {
                       }}>
                       <a className="nav-link">Worker Sign-Up</a>
                     </li>
-                    <li>
-                      <a href="contact.html" className="nav-link">
-                        Contact
-                      </a>
-                    </li>
                   </ul>
                 </nav>
               </div>

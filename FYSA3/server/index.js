@@ -14,21 +14,12 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + "/../react-client/dist"));
 
 app.get("/api/profs", function (req, res) {
+  console.log("here");
   db.selectAllProf(function (err, data) {
+    console.log(data, err);
     if (err) {
       res.sendStatus(500);
     } else {
-      res.json(data);
-    }
-  });
-});
-
-app.post("/api/workers", function (req, res) {
-  db.selectWorkers(req.body.prof, function (err, data) {
-    if (err) {
-      res.sendStatus(500);
-    } else {
-      console.log("data", data);
       res.json(data);
     }
   });
@@ -83,10 +74,21 @@ app.post("/login", (req, res) => {
     }
   });
 });
-
+app.put("/user/update", function (req, res) {
+  db.updateUser(req.body.data, (data) => {
+    console.log(data);
+    res.send(data);
+  });
+});
+app.put("/worker/update", function (req, res) {
+  db.updateWorker(req.body.data, (data) => {
+    console.log(data);
+    res.send(data);
+  });
+});
 app.post("/workerRegister", (req, res) => {
   console.log(req.body);
-  var data = req.body;
+  var data = req.body.data;
   data.rate = 0;
   db.addWorker(data, (err, worker) => {
     if (err) {
@@ -97,9 +99,21 @@ app.post("/workerRegister", (req, res) => {
     }
   });
 });
-
+app.post("/addorder", (req, res) => {
+  console.log(req.body);
+  var data = req.body.data;
+  db.addOrder(data, (err, order) => {
+    if (err) {
+      res.send("Order not created");
+    } else {
+      console.log("order created successfully");
+      res.json(order);
+    }
+  });
+});
 app.post("/userRegister", (req, res) => {
-  db.addUser(req.body, (err, user) => {
+  console.log(req.body.data);
+  db.addUser(req.body.data, (err, user) => {
     if (err) {
       res.send("User not created");
     } else {
@@ -118,7 +132,7 @@ app.get("/orders", function (req, res) {
     }
   });
 });
-app.post("/api/orders/panding", function (req, res) {
+app.post("/api/orders/pending", function (req, res) {
   console.log(req.body.data);
   db.selectWorkerPandingOrders(req.body.data, function (err, data) {
     if (err) {
@@ -151,6 +165,19 @@ app.post("/api/orders/done", function (req, res) {
     }
   });
 });
+
+app.post("/api/orders/user", function (req, res) {
+  console.log(req.body.data);
+  db.selectUserOrders(req.body.data, function (err, data) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+});
+
 app.put("/order/update", function (req, res) {
   console.log(req.body);
   db.updateOrder(req.body, function (err, data) {

@@ -2,12 +2,14 @@ import React from "react";
 import WorkerNavbar from "./WorkerNavbar.jsx";
 import axios from "axios";
 import WorkerMyProfile from "./WorkerMyProfile.jsx";
+import WorkerUpdate from "./WorkerUpdate.jsx";
 
 class WorkerFeed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      panding: [],
+      user: this.props.data,
+      pending: [],
       doing: [],
       done: [],
       view: "home"
@@ -18,11 +20,11 @@ class WorkerFeed extends React.Component {
   componentDidMount() {
     var data = this.props.data._id;
     axios
-      .post("/api/orders/panding", { data })
+      .post("/api/orders/pending", { data })
       .then((res) => {
-        const panding = res.data;
-        console.log("panding", panding);
-        this.setState({ panding });
+        const pending = res.data;
+        console.log("pending", pending);
+        this.setState({ pending });
       })
       .catch((err) => {
         console.log(err);
@@ -72,24 +74,26 @@ class WorkerFeed extends React.Component {
       return (
         <div className="workerfeed ">
           <WorkerNavbar handleClick={this.handleClick} />
-          <div className="pandingorders container">
+          <div className="pendingorders container">
             <h1>Pending Orders</h1>
             <table className="table table-striped orders">
               <thead>
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Customer</th>
+                  <th scope="col">Description</th>
                   <th scope="col">Location</th>
                   <th scope="col">Date</th>
                   <th scope="col">Operation</th>
                 </tr>
               </thead>
               <tbody>
-                {this.state.panding.map((element, index) => {
+                {this.state.pending.map((element, index) => {
                   return (
                     <tr>
                       <th scope="row">{index}</th>
-                      <td>{element.userName}</td>
+                      <td>{element.user_id.username}</td>
+                      <td>{element.info}</td>
                       <td>{element.location}</td>
                       <td>{element.date}</td>
                       <td>
@@ -115,6 +119,7 @@ class WorkerFeed extends React.Component {
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Customer</th>
+                  <th scope="col">Description</th>
                   <th scope="col">Location</th>
                   <th scope="col">Date</th>
                   <th scope="col">Operation</th>
@@ -125,7 +130,8 @@ class WorkerFeed extends React.Component {
                   return (
                     <tr>
                       <th scope="row">{index}</th>
-                      <td>{element.userName}</td>
+                      <td>{element.user_id.username}</td>
+                      <td>{element.info}</td>
                       <td>{element.location}</td>
                       <td>{element.date}</td>
                       <td>
@@ -151,6 +157,7 @@ class WorkerFeed extends React.Component {
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Customer</th>
+                  <th scope="col">Description</th>
                   <th scope="col">Location</th>
                   <th scope="col">Date</th>
                 </tr>
@@ -160,7 +167,8 @@ class WorkerFeed extends React.Component {
                   return (
                     <tr>
                       <th scope="row">{index}</th>
-                      <td>{element.userName}</td>
+                      <td>{element.user_id.username}</td>
+                      <td>{element.info}</td>
                       <td>{element.location}</td>
                       <td>{element.date}</td>
                     </tr>
@@ -171,8 +179,20 @@ class WorkerFeed extends React.Component {
           </div>
         </div>
       );
+    } else if (this.state.view === "update") {
+      return (
+        <div>
+          <WorkerNavbar handleClick={this.handleClick} />
+          <WorkerUpdate handleClick={this.handleClick} user={this.state.user} />
+        </div>
+      );
     } else {
-      return <WorkerMyProfile data={this.props.data} />;
+      return (
+        <WorkerMyProfile
+          handleClick={this.handleClick}
+          data={this.props.data}
+        />
+      );
     }
   }
 }

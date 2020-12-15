@@ -1,5 +1,5 @@
 import React from "react";
-
+import axios from "axios";
 class UserNavbar extends React.Component {
   constructor(props) {
     super(props);
@@ -37,7 +37,7 @@ class UserNavbar extends React.Component {
                     <li className="active">
                       <a
                         onClick={() => {
-                          this.props.handleClick("user-feed");
+                          this.props.handleClick("home");
                         }}
                         className="nav-link">
                         Home
@@ -45,15 +45,21 @@ class UserNavbar extends React.Component {
                     </li>
                     <li
                       onClick={() => {
-                        this.props.handleClick("");
+                        this.props.handleClick("myprofil");
                       }}>
                       <a className="nav-link">Profil</a>
                     </li>
                     <li
                       onClick={() => {
-                        this.props.handleClick("");
+                        this.props.handleClick("orders");
                       }}>
                       <a className="nav-link">Orders</a>
+                    </li>
+                    <li
+                      onClick={() => {
+                        this.props.handleClick("");
+                      }}>
+                      <a className="nav-link">Log Out </a>
                     </li>
                   </ul>
                 </nav>

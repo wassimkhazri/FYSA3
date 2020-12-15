@@ -50,9 +50,15 @@ var userSchema = mongoose.Schema({
   }
 });
 var orderSchema = mongoose.Schema({
-  userId: String,
-  workerId: String,
-  userName: String,
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  },
+  worker_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Worker"
+  },
+  info: String,
   date: String,
   state: String,
   location: String
@@ -60,7 +66,9 @@ var orderSchema = mongoose.Schema({
 
 var profSchema = mongoose.Schema({
   name: String,
-  workers: Array,
+  workers: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Worker" }]
+  },
   img: String
 });
 
@@ -77,23 +85,15 @@ var Order = mongoose.model("Order", orderSchema);
 // order.save();
 
 var selectAllProf = function (callback) {
-  Prof.find({}, function (err, prof) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, prof);
-    }
-  });
-};
-
-var selectWorkers = function (myWorker, callback) {
-  Worker.find({ prof: myWorker }, function (err, workers) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, workers);
-    }
-  });
+  Prof.find({})
+    .populate("workers")
+    .exec((err, prof) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, prof);
+      }
+    });
 };
 
 var selectOneWorker = function (worker, callback) {
@@ -142,6 +142,16 @@ const addWorker = function (worker, callback) {
     });
   });
 };
+const addOrder = function (order, callback) {
+  var myorder = new Order(order);
+  myorder.save((err, order) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, order);
+    }
+  });
+};
 
 const addUser = function (user, callback) {
   bcrypt.genSalt(10, function (err, salt) {
@@ -160,41 +170,83 @@ const addUser = function (user, callback) {
 };
 
 var selectAllOrders = function (callback) {
-  Order.find({}, function (err, orders) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, orders);
-    }
-  });
+  Order.find({})
+    .populate("worker_id")
+    .exec((err, orders) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, orders);
+      }
+    });
+
+  // Order.find({}, function (err, orders) {
+  //   if (err) {
+  //     callback(err, null);
+  //   } else {
+  //     callback(null, orders);
+  //   }
+  // });
 };
 
 var selectWorkerPandingOrders = function (data, callback) {
-  Order.find({ workerId: data, state: "panding" }, function (err, orders) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, orders);
-    }
-  });
+  Order.find({ worker_id: data, state: "pending" })
+    .populate("user_id")
+    .exec((err, orders) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, orders);
+      }
+    });
 };
 var selectWorkerDoingOrders = function (data, callback) {
-  Order.find({ workerId: data, state: "doing" }, function (err, orders) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, orders);
-    }
-  });
+  Order.find({ worker_id: data, state: "doing" })
+    .populate("user_id")
+    .exec((err, orders) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, orders);
+      }
+    });
 };
 var selectWorkerDoneOrders = function (data, callback) {
-  Order.find({ workerId: data, state: "done" }, function (err, orders) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, orders);
-    }
-  });
+  Order.find({ worker_id: data, state: "done" })
+    .populate("user_id")
+    .exec((err, orders) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, orders);
+      }
+    });
+};
+
+var selectUserOrders = function (data, callback) {
+  Order.find({ user_id: data })
+    .populate("worker_id")
+    .exec((err, orders) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, orders);
+      }
+    });
+};
+var updateUser = async function (user, callback) {
+  var userid = user._id;
+  delete user._id;
+  console.log(user);
+  const res = await User.replaceOne({ _id: userid }, user);
+  callback(res);
+};
+var updateWorker = async function (worker, callback) {
+  var workerid = worker._id;
+  delete worker._id;
+  console.log(worker);
+  const res = await Worker.replaceOne({ _id: workerid }, worker);
+  callback(res);
 };
 var updateOrder = function (data, callback) {
   Order.findOneAndUpdate(
@@ -209,14 +261,18 @@ var updateOrder = function (data, callback) {
     }
   );
 };
+
 module.exports.addWorker = addWorker;
 module.exports.addUser = addUser;
+module.exports.updateWorker = updateWorker;
+module.exports.updateUser = updateUser;
+module.exports.addOrder = addOrder;
 module.exports.updateOrder = updateOrder;
 module.exports.selectOneUser = selectOneUser;
 module.exports.selectAllProf = selectAllProf;
-module.exports.selectWorkers = selectWorkers;
 module.exports.selectOneWorker = selectOneWorker;
 module.exports.selectAllOrders = selectAllOrders;
 module.exports.selectWorkerPandingOrders = selectWorkerPandingOrders;
 module.exports.selectWorkerDoingOrders = selectWorkerDoingOrders;
 module.exports.selectWorkerDoneOrders = selectWorkerDoneOrders;
+module.exports.selectUserOrders = selectUserOrders;
