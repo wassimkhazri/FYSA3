@@ -9,7 +9,7 @@ class WorkersList extends React.Component {
   render() {
     return (
       <div>
-        <UserNavbar handleClick={this.props.handleClick} />
+        <UserNavbar handleClick={this.props.handleClick} handlelog={this.props.handleClick} />
         <div className="site-section bg-light">
           <div className="container">
             <div className="row justify-content-center text-center mb-5 section-2-title">

@@ -26,7 +26,7 @@ class UserOrders extends React.Component {
   render() {
     return (
       <div>
-        <UserNavbar handleClick={this.props.handleClick} />
+        <UserNavbar handlelog={this.props.handleClick} handleClick={this.props.handleClick} />
         <div className="userorders">
           <div className="workerfeed ">
             <div className="pendingorders container">

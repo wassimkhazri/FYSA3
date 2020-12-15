@@ -44,7 +44,10 @@ class UserFeed extends React.Component {
     if (this.state.view === "home") {
       return (
         <div>
-          <UserNavbar handleClick={this.handleClick} />
+          <UserNavbar
+            handlelog={this.props.handleClick}
+            handleClick={this.handleClick}
+          />
           <div className="site-section" style={{ backgroundColor: "#dedffe" }}>
             <div className="container">
               <div className="row align-items-stretch">
@@ -77,6 +80,7 @@ class UserFeed extends React.Component {
       return (
         <div>
           <WorkersList
+            handlelog={this.props.handleClick}
             handleClick={this.handleClick}
             handleProfileClick={this.handleProfileClick}
             data={this.state.current}
@@ -87,6 +91,7 @@ class UserFeed extends React.Component {
       return (
         <div>
           <WorkerProfile
+            handlelog={this.props.handleClick}
             handleClick={this.handleClick}
             user={this.state.user}
             data={this.state.currentprofile}
@@ -95,12 +100,16 @@ class UserFeed extends React.Component {
       );
     } else if (this.state.view === "myprofil") {
       return (
-        <UserMyProfile handleClick={this.handleClick} data={this.props.data} />
+        <UserMyProfile
+          handlelog={this.props.handleClick}
+          handleClick={this.handleClick}
+          data={this.props.data}
+        />
       );
     } else if (this.state.view === "orders") {
       return (
         <UserOrders
-          handleClick={this.handleClick}
+          handlelog={this.props.handleClick}
           handleClick={this.handleClick}
           user={this.state.user}
         />
@@ -108,7 +117,10 @@ class UserFeed extends React.Component {
     } else if (this.state.view === "update") {
       return (
         <div>
-          <UserNavbar handleClick={this.handleClick} />
+          <UserNavbar
+            handlelog={this.props.handleClick}
+            handleClick={this.handleClick}
+          />
           <UserUpdate handleClick={this.handleClick} user={this.state.user} />
         </div>
       );

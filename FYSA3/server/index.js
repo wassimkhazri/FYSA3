@@ -42,7 +42,10 @@ app.post("/login", (req, res) => {
             if (!validPass) {
               return res.send("Invalid password");
             } else {
-              let token = jwt.sign({ _id: user._id }, "mysecrettoken");
+              let token = jwt.sign(
+                { username: user.username, password: user.password },
+                "mysecrettoken"
+              );
               res.status(200).header("auth-token", token).send({ token, user });
             }
           }
@@ -52,7 +55,10 @@ app.post("/login", (req, res) => {
         if (!validPass) {
           return res.send("Invalid password");
         } else {
-          let token = jwt.sign({ _id: worker._id }, "mysecrettoken");
+          let token = jwt.sign(
+            { username: worker.username, password: worker.password },
+            "mysecrettoken"
+          );
           res.status(200).header("auth-token", token).send({ token, worker });
         }
       }
@@ -150,7 +156,44 @@ app.post("/api/orders/done", function (req, res) {
     }
   });
 });
-
+app.post("/login/auth", function (req, res) {
+  console.log(req.body.data);
+  jwt.verify(req.body.data, "mysecrettoken", (err, data) => {
+    if (data) {
+      console.log(data);
+      let givenPassword = data.password;
+      db.selectOneWorker(data, async (err, worker) => {
+        if (err) {
+          res.sendStatus(500);
+        } else {
+          if (!worker) {
+            db.selectOneUser(data, async (err, user) => {
+              if (err) {
+                res.sendStatus(500);
+              } else {
+                let validPass = givenPassword === user.password;
+                if (!validPass) {
+                  return res.send("Invalid password");
+                } else {
+                  res.send(user);
+                }
+              }
+            });
+          } else {
+            let validPass = givenPassword === user.password;
+            if (!validPass) {
+              return res.send("Invalid password");
+            } else {
+              res.send(worker);
+            }
+          }
+        }
+      });
+    } else {
+      res.send("wrong token");
+    }
+  });
+});
 app.post("/api/orders/user", function (req, res) {
   console.log(req.body.data);
   db.selectUserOrders(req.body.data, function (err, data) {

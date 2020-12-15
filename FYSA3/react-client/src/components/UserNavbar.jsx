@@ -57,7 +57,8 @@ class UserNavbar extends React.Component {
                     </li>
                     <li
                       onClick={() => {
-                        this.props.handleClick("");
+                        window.localStorage.clear();
+                        this.props.handlelog("home");
                       }}>
                       <a className="nav-link">Log Out </a>
                     </li>
