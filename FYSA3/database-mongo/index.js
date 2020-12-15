@@ -234,7 +234,20 @@ var selectUserOrders = function (data, callback) {
       }
     });
 };
-
+var updateUser = async function (user, callback) {
+  var userid = user._id;
+  delete user._id;
+  console.log(user);
+  const res = await User.replaceOne({ _id: userid }, user);
+  callback(res);
+};
+var updateWorker = async function (worker, callback) {
+  var workerid = worker._id;
+  delete worker._id;
+  console.log(worker);
+  const res = await Worker.replaceOne({ _id: workerid }, worker);
+  callback(res);
+};
 var updateOrder = function (data, callback) {
   Order.findOneAndUpdate(
     { _id: data.id },
@@ -248,8 +261,11 @@ var updateOrder = function (data, callback) {
     }
   );
 };
+
 module.exports.addWorker = addWorker;
 module.exports.addUser = addUser;
+module.exports.updateWorker = updateWorker;
+module.exports.updateUser = updateUser;
 module.exports.addOrder = addOrder;
 module.exports.updateOrder = updateOrder;
 module.exports.selectOneUser = selectOneUser;

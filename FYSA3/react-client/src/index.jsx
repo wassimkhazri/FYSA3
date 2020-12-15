@@ -1,14 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import workerRegister from "./components/workerRegister.jsx";
+import WorkerRegister from "./components/workerRegister.jsx";
 import UserRegister from "./components/UserRegister.jsx";
 import Home from "./components/Home.jsx";
-import WorkerLogin from "./components/Login.jsx";
 import UserFeed from "./components/UserFeed.jsx";
 import WorkerFeed from "./components/WorkerFeed.jsx";
-import OrdersList from "./components/OrdersList.jsx";
 import axios from "axios";
-import WorkerProfile from "./components/WorkerProfile.jsx";
 
 class App extends React.Component {
   constructor(props) {
@@ -63,7 +60,7 @@ class App extends React.Component {
     } else if (this.state.view === "worker-signup") {
       return (
         <div>
-          <workerRegister handleSubmit={this.handleClick} />
+          <WorkerRegister handleSubmit={this.handleClick} />
         </div>
       );
     } else if (this.state.view === "worker-feed") {

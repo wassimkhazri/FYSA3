@@ -45,7 +45,7 @@ class UserNavbar extends React.Component {
                     </li>
                     <li
                       onClick={() => {
-                        this.props.handleClick("profil");
+                        this.props.handleClick("myprofil");
                       }}>
                       <a className="nav-link">Profil</a>
                     </li>

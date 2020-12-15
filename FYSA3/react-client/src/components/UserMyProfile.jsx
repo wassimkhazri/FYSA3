@@ -51,6 +51,7 @@ class UserMyProfile extends React.Component {
                 </div>
                 <div className="col-md-2">
                   <input
+                    onClick={() => this.props.handleClick("update")}
                     type="submit"
                     className="profile-edit-btn"
                     name="btnAddMore"
