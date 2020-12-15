@@ -30,18 +30,20 @@ class App extends React.Component {
       .post("/login", user)
       .then((user) => {
         if (user) {
-          if (user.data.prof) {
-            this.setState({ user: user.data, view: "worker-feed" });
+          console.log(user.data.user);
+          if (user.data === "Invalid password") {
+            this.setState({ view: "home" });
+          } else if (user.data.worker) {
+            this.setState({ user: user.data.worker, view: "worker-feed" });
           } else {
-            this.setState({ user: user.data, view: "user-feed" });
+            this.setState({ user: user.data.user, view: "user-feed" });
           }
-          console.log(user);
         } else {
           this.setState({
             view: "home"
           });
         }
-        window.localStorage.setItem("auth-token", user.data.auth-token);
+        window.localStorage.setItem("auth-token", user.data.token);
         console.log(this.state.user);
       })
       .catch((error) => {

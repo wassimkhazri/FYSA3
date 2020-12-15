@@ -25,6 +25,7 @@
     "bootstrap": "^4.5.3",
     "express": "^4.15.0",
     "jquery": "^3.1.1",
+    "jsonwebtoken": "^8.5.1",
     "mdbreact": "^5.0.1",
     "mongoose": "^5.10.16",
     "mysql": "^2.13.0",
