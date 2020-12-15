@@ -41,6 +41,8 @@ class App extends React.Component {
             view: "home"
           });
         }
+        window.localStorage.setItem("auth-token", user.data.auth-token);
+        console.log(this.state.user);
       })
       .catch((error) => {
         console.log("error");

@@ -37,7 +37,7 @@ app.post("/login", (req, res) => {
           if (err) {
             res.sendStatus(500);
           } else {
-            bcrypt.compare(
+            let validPass = bcrypt.compare(
               givenPassword,
               user.password,
               function (err, result) {
@@ -45,26 +45,31 @@ app.post("/login", (req, res) => {
                   console.log("compare error", err);
                 } else if (result) {
                   console.log("user password matches.", result);
-                  // isLoggedIn = result;
                   // To do: if compare true user must be redirected to feed
                 }
               }
             );
-            res.send(user);
+            if (!validPass) return res.send("Invalid password");
+            let token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+            res.status(200).header("auth-token", token), send(token);
           }
         });
       } else {
-        console.log(worker);
-        bcrypt.compare(givenPassword, worker.password, function (err, result) {
-          if (err) {
-            console.log("compare error", err);
-          } else {
-            console.log("worker password matches", result);
-            isLoggedIn = result;
-            // To do: if compare true worker must be redirected to feed
+        let validPass = bcrypt.compare(
+          givenPassword,
+          worker.password,
+          function (err, result) {
+            if (err) {
+              console.log("compare error", err);
+            } else {
+              console.log("worker password matches", result);
+              // To do: if compare true worker must be redirected to feed
+            }
           }
-        });
-        res.send(worker);
+        );
+        if (!validPass) return res.send("Invalid password");
+        let token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+        res.status(200).header("auth-token", token), send(token);
       }
     }
   });
