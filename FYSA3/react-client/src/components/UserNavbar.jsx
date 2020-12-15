@@ -6,6 +6,7 @@ class UserNavbar extends React.Component {
   }
 
   render() {
+    // that up of page when the user log in to his account
     return (
       <div>
         <header

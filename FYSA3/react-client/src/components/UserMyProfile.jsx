@@ -8,9 +8,13 @@ class UserMyProfile extends React.Component {
   }
 
   render() {
+    // that component render a set of informations related to that user
     return (
       <div>
-        <UserNavbar handlelog={this.props.handleClick} handleClick={this.props.handleClick} />
+        <UserNavbar
+          handlelog={this.props.handleClick}
+          handleClick={this.props.handleClick}
+        />
         <div className="UserMyProfile ">
           <div className="container emp-profile  ">
             <form method="post">

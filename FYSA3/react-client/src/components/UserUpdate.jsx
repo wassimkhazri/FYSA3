@@ -36,6 +36,7 @@ class UserUpdate extends React.Component {
       });
   }
   render() {
+    // that component use it when user want to update something
     return (
       <div>
         <div className="wrapper bg-white mt-sm-5 container">

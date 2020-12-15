@@ -8,6 +8,7 @@ class WorkerMyProfile extends React.Component {
   }
 
   render() {
+    // that profile display when the worker check his profile
     return (
       <div>
         <WorkerNavbar

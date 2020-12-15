@@ -35,6 +35,7 @@ class Order extends React.Component {
       });
   }
   render() {
+    // here we have a form for make order
     return (
       <div className="container">
         <div className="order-messsage">

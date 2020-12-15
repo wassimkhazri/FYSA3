@@ -19,6 +19,7 @@ class WorkerFeed extends React.Component {
   }
   componentDidMount() {
     var data = this.props.data._id;
+    // send all the orders that they have "pending" status
     axios
       .post("/api/orders/pending", { data })
       .then((res) => {
@@ -30,6 +31,7 @@ class WorkerFeed extends React.Component {
         console.log(err);
       });
     axios
+      // send all the orders that they have "doing" status
       .post("/api/orders/doing", { data })
       .then((res) => {
         const doing = res.data;
@@ -40,6 +42,7 @@ class WorkerFeed extends React.Component {
         console.log(err);
       });
     axios
+      // send all the orders that they have "done" status
       .post("/api/orders/done", { data })
       .then((res) => {
         const done = res.data;
@@ -57,6 +60,7 @@ class WorkerFeed extends React.Component {
     };
     console.log(data);
     axios
+
       .put("/order/update", data)
       .then((data) => {
         console.log(data);

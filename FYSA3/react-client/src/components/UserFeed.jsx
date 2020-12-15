@@ -41,6 +41,7 @@ class UserFeed extends React.Component {
   }
 
   render() {
+    // this is the user feed component when the user log in his account
     if (this.state.view === "home") {
       return (
         <div>

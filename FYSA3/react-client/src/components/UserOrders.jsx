@@ -24,9 +24,13 @@ class UserOrders extends React.Component {
   }
 
   render() {
+    // that page display when the user check the orders
     return (
       <div>
-        <UserNavbar handlelog={this.props.handleClick} handleClick={this.props.handleClick} />
+        <UserNavbar
+          handlelog={this.props.handleClick}
+          handleClick={this.props.handleClick}
+        />
         <div className="userorders">
           <div className="workerfeed ">
             <div className="pendingorders container">

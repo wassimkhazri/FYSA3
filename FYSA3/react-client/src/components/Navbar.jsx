@@ -6,6 +6,7 @@ class Navbar extends React.Component {
   }
 
   render() {
+    // the navbar component it is the up place of page
     return (
       <div>
         <header className="site-navbar site-navbar-target" role="banner">

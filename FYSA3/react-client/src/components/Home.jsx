@@ -8,6 +8,7 @@ class Home extends React.Component {
   }
 
   render() {
+    // component render set of informations that the user will find on the home page
     return (
       <div>
         <div className="site-wrap" id="home-section">

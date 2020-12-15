@@ -36,6 +36,7 @@ class UserRegister extends Component {
   }
 
   render() {
+    //  // here we have a form for user register
     return (
       <div>
         <div>

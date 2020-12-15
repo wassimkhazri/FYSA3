@@ -15,6 +15,7 @@ class WorkerLogin extends React.Component {
   }
 
   render() {
+    // that component render some cases that the users use it like case for  user name and case for password
     return (
       <div>
         <div className="col-md-6">

@@ -6,6 +6,7 @@ class WorkerNavbar extends React.Component {
   }
 
   render() {
+    // that up of page when the worker log in to his account
     return (
       <div>
         <header
